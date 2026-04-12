@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formations Extensions de Cils — Barbara Beauty | CilsJo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --beige:     #F5F0EB;
+      --beige2:    #EDE7DF;
+      --beige3:    #E5DDD3;
+      --black:     #1A1A1A;
+      --black2:    #111111;
+      --gold:      #B8956A;
+      --gold-light:#D4BC9A;
+      --gold-dark: #9A7B55;
+      --white:     #FFFFFF;
+      --muted:     #8A8278;
+      --text:      #1A1A1A;
+      --terracotta: #C4724E;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--beige); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    .nav-wrap {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 200; width: calc(100% - 48px); max-width: 1200px;
+    }
+    nav {
+      background: var(--white);
+      border-radius: 60px;
+      padding: 10px 20px 10px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-logo-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; letter-spacing: 3px;
+      color: var(--black); text-transform: uppercase;
+    }
+    .nav-logo-line { width: 100%; height: 1px; background: var(--black); margin: 1px 0; }
+    .nav-logo-bottom {
+      font-family: 'Great Vibes', cursive;
+      font-size: 0.85rem; color: var(--gold); text-align: center;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500; color: var(--text);
+      text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--black); color: var(--white);
+      padding: 10px 24px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 600; text-decoration: none;
+      letter-spacing: 0.5px; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--black2); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 60vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 140px 40px 80px;
+      background: linear-gradient(145deg, var(--black) 0%, #2A1F18 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(184,149,106,0.12) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 20px; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold-light);
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400; color: var(--white); line-height: 1.08;
+      margin-bottom: 20px; position: relative;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.55);
+      max-width: 600px; margin: 0 auto 40px; line-height: 1.7; font-weight: 300;
+    }
+    .hero-badges {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .hero-badge-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 400;
+    }
+    .hero-badge-item span { font-size: 1.1rem; }
+
+    /* ── SECTION COMMON ── */
+    .tag {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .tag-center { justify-content: center; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400; line-height: 1.1; color: var(--text);
+    }
+    .section-title em { font-style: italic; }
+
+    /* ── FORMATIONS GRID ── */
+    .formations-section {
+      padding: 80px 40px;
+    }
+    .formations-section .section-header {
+      text-align: center; margin-bottom: 60px;
+    }
+    .formations-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 24px; max-width: 1300px; margin: 0 auto;
+    }
+    .formation-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .formation-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .formation-card.featured {
+      grid-column: span 1;
+    }
+
+    .fc-header {
+      padding: 36px 32px 0;
+    }
+    .fc-level {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold-dark);
+      background: rgba(184,149,106,0.12);
+      padding: 4px 14px; border-radius: 50px; margin-bottom: 16px;
+    }
+    .fc-level.expert { background: rgba(26,26,26,0.08); color: var(--black); }
+    .fc-level.coaching { background: rgba(196,114,78,0.12); color: var(--terracotta); }
+    .fc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 400; line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .fc-title em { font-style: italic; }
+
+    .fc-body {
+      padding: 20px 32px 32px; flex: 1; display: flex; flex-direction: column;
+    }
+    .fc-program-title {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--beige2);
+    }
+    .fc-list {
+      list-style: none; display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .fc-list li {
+      font-size: 0.82rem; color: #555; line-height: 1.5;
+      padding-left: 18px; position: relative;
+    }
+    .fc-list li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .fc-footer {
+      padding: 0 32px 32px;
+      display: flex; flex-wrap: wrap; gap: 20px; align-items: center;
+      border-top: 1px solid var(--beige2);
+      padding-top: 24px; margin-top: auto;
+    }
+    .fc-info {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .fc-info-icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--beige); display: flex; align-items: center;
+      justify-content: center; font-size: 0.9rem; flex-shrink: 0;
+    }
+    .fc-info strong { color: var(--text); font-weight: 600; }
+
+    .fc-price-block {
+      padding: 0 32px 32px;
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+    }
+    .fc-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 500; color: var(--text);
+    }
+    .fc-price-vip {
+      font-size: 0.85rem; color: var(--gold-dark); font-weight: 600;
+      background: rgba(184,149,106,0.12);
+      padding: 4px 14px; border-radius: 50px;
+    }
+
+    .fc-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--black); color: var(--white);
+      padding: 14px 28px; border-radius: 50px;
+      font-size: 0.82rem; font-weight: 600; text-decoration: none;
+      letter-spacing: 0.5px; transition: background 0.2s;
+      margin: 0 32px 32px;
+    }
+    .fc-cta:hover { background: var(--black2); }
+    .fc-cta .arrow {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── COACHING (special) ── */
+    .coaching-note {
+      font-size: 0.78rem; color: var(--terracotta); font-weight: 500;
+      font-style: italic; margin-bottom: 16px;
+    }
+
+    /* ── INFO BAND ── */
+    .info-band {
+      background: var(--black); padding: 60px 40px;
+      display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;
+    }
+    .ib-item {
+      display: flex; align-items: center; gap: 16px; color: var(--white);
+    }
+    .ib-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .ib-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+    .ib-value { font-size: 0.95rem; font-weight: 500; margin-top: 2px; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 100px 40px; text-align: center;
+      background: var(--beige2);
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400; line-height: 1.15; margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; }
+    .cta-sub {
+      font-size: 0.92rem; color: var(--muted); max-width: 500px;
+      margin: 0 auto 36px; line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--black); color: var(--white);
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: var(--black2); }
+    .cta-btn .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black2); padding: 60px 60px 30px; color: var(--white);
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; gap: 40px;
+      padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .footer-logo-wrap { display: flex; flex-direction: column; line-height: 1; margin-bottom: 16px; }
+    .footer-logo-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .footer-logo-line { width: 100%; height: 1px; background: rgba(255,255,255,0.3); margin: 2px 0; }
+    .footer-logo-bottom { font-family: 'Great Vibes', cursive; font-size: 0.9rem; color: var(--gold); text-align: center; }
+    .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.6; max-width: 260px; }
+    .footer-col-title {
+      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .formations-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .formations-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .info-band { gap: 30px; }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<div class="nav-wrap">
+  <nav>
+    <a class="nav-logo" href="serenique-lash.html">
+      <span class="nav-logo-top">BARBARA</span>
+      <div class="nav-logo-line"></div>
+      <span class="nav-logo-bottom">beauty</span>
+    </a>
+    <div class="nav-links">
+      <a href="serenique-lash.html#services">Services</a>
+      <a href="formation.html">Formation</a>
+      <a href="serenique-lash.html#about">À propos</a>
+      <a href="serenique-lash.html#tarifs">Tarifs</a>
+      <a href="serenique-lash.html#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="mailto:barbarabeauty.formation@gmail.com">Nous contacter</a>
+  </nav>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div style="position:relative; z-index:1;">
+    <div class="hero-badge">Formatrice certifiée CilsJo</div>
+    <h1 class="hero-title">
+      Formations<br><em>Extensions de Cils</em>
+    </h1>
+    <p class="hero-sub">Devenez lash artist avec des formations complètes, de la théorie à la pratique. Formatrice certifiée CilsJo, je vous accompagne à chaque étape.</p>
+    <div class="hero-badges">
+      <div class="hero-badge-item"><span>&#128205;</span> Marseille | Bouc-Bel-Air</div>
+      <div class="hero-badge-item"><span>&#128176;</span> Paiement en 4x sans frais (PayPal)</div>
+      <div class="hero-badge-item"><span>&#127891;</span> Éligible FAFCEA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMATIONS ── -->
+<section class="formations-section">
+  <div class="section-header">
+    <div class="tag tag-center">Nos formations</div>
+    <h2 class="section-title">Choisissez votre <em>formation</em></h2>
+  </div>
+
+  <div class="formations-grid">
+
+    <!-- 1. Coaching Privé -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-level coaching">Coaching privé</div>
+        <h3 class="fc-title" style="font-family: 'Great Vibes', cursive; font-size: 2.5rem;">Coaching Privé</h3>
+      </div>
+      <div class="fc-body">
+        <div class="coaching-note">Réservé aux techniciennes formées par CilsJo</div>
+        <p style="font-size: 0.88rem; color: #555; line-height: 1.7; margin-bottom: 20px;">
+          Formation 100% personnalisée qui vous permet de travailler précisément sur vos lacunes et d'améliorer votre technique.
+        </p>
+        <div class="fc-program-title">Au programme</div>
+        <ul class="fc-list">
+          <li>Choix des thèmes sur lesquels vous voulez travailler</li>
+          <li>Analyse de vos poses et de votre technique</li>
+          <li>Conseils pour effectuer vos poses parfaites, sur une bonne rétention et pour gagner en rapidité</li>
+          <li>Démonstration de la formatrice</li>
+          <li>Pratique sur modèle accompagnée</li>
+        </ul>
+      </div>
+      <div class="fc-price-block">
+        <div class="fc-price">389€</div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-info"><div class="fc-info-icon">&#128336;</div><div><strong>1 demi-journée</strong></div></div>
+        <div class="fc-info"><div class="fc-info-icon">&#128205;</div><div><strong>Marseille | Bouc-Bel-Air</strong></div></div>
+      </div>
+      <a class="fc-cta" href="mailto:barbarabeauty.formation@gmail.com?subject=Coaching Privé">
+        Réserver mon coaching <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+
+    <!-- 2. Formation Cils à Cils -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-level">Formation initiale débutante</div>
+        <h3 class="fc-title">Formation<br><em>Cils à Cils</em></h3>
+      </div>
+      <div class="fc-body">
+        <div class="fc-program-title">Programme théorie & pratique</div>
+        <ul class="fc-list">
+          <li>Anatomie de l'œil et du cil naturel</li>
+          <li>Présentation de la technique cils à cils</li>
+          <li>Découverte du matériel et son utilisation</li>
+          <li>Les différents types d'extensions (courbures/diamètres/longueurs)</li>
+          <li>Tout savoir sur la colle d'extensions de cils</li>
+          <li>Protocole de la pose d'extension de cils</li>
+          <li>Stylisme / Mapping</li>
+          <li>Les contres indications</li>
+          <li>Réussir ses poses d'extensions de cils</li>
+          <li>Les règles d'hygiène et de sécurité</li>
+          <li>Exercice pratique sur support</li>
+          <li>Démonstration formatrice</li>
+          <li>Pratique sur modèle accompagnée</li>
+        </ul>
+      </div>
+      <div class="fc-price-block">
+        <div class="fc-price">599€</div>
+        <div class="fc-price-vip">VIP 999€</div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-info"><div class="fc-info-icon">&#128336;</div><div><strong>2 jours</strong></div></div>
+        <div class="fc-info"><div class="fc-info-icon">&#128205;</div><div><strong>Marseille | Bouc-Bel-Air</strong></div></div>
+      </div>
+      <a class="fc-cta" href="mailto:barbarabeauty.formation@gmail.com?subject=Formation Cils à Cils">
+        Réserver cette formation <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+
+    <!-- 3. Formation Volume Russe -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-level">Formation initiale débutante</div>
+        <h3 class="fc-title">Formation<br><em>Volume Russe</em></h3>
+      </div>
+      <div class="fc-body">
+        <div class="fc-program-title">Programme théorie & pratique</div>
+        <ul class="fc-list">
+          <li>Anatomie de l'œil et du cil naturel</li>
+          <li>Présentation de la technique volume russe</li>
+          <li>Découverte du matériel et son utilisation</li>
+          <li>Les différents types d'extensions (courbures/diamètres/longueurs)</li>
+          <li>Tout savoir sur la colle d'extensions de cils</li>
+          <li>Protocole de la pose d'extension de cils</li>
+          <li>Stylisme / Mapping</li>
+          <li>Les contres indications</li>
+          <li>Réussir ses poses d'extensions de cils</li>
+          <li>Les règles d'hygiène et de sécurité</li>
+          <li>Exercice pratique sur support</li>
+          <li>Démonstration formatrice</li>
+          <li>Pratique sur modèle accompagnée</li>
+        </ul>
+      </div>
+      <div class="fc-price-block">
+        <div class="fc-price">599€</div>
+        <div class="fc-price-vip">VIP 999€</div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-info"><div class="fc-info-icon">&#128336;</div><div><strong>2 jours</strong></div></div>
+        <div class="fc-info"><div class="fc-info-icon">&#128205;</div><div><strong>Marseille | Bouc-Bel-Air</strong></div></div>
+      </div>
+      <a class="fc-cta" href="mailto:barbarabeauty.formation@gmail.com?subject=Formation Volume Russe">
+        Réserver cette formation <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+
+    <!-- 4. Formation Volume Russe Expert -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-level expert">Formation perfectionnement</div>
+        <h3 class="fc-title">Formation Volume Russe<br><em>Expert</em></h3>
+      </div>
+      <div class="fc-body">
+        <div class="fc-program-title">Programme théorie & pratique</div>
+        <ul class="fc-list">
+          <li>Augmenter sa rétention</li>
+          <li>Comprendre et choisir sa colle</li>
+          <li>Bien préparer les cils naturels</li>
+          <li>Top Line / Perfect Line</li>
+          <li>Perfect Fans</li>
+          <li>Le stylisme</li>
+          <li>Découvrir les courbures B, L, M et V</li>
+          <li>Technique de pose pour réussir ses effets</li>
+          <li>Entretien des extensions</li>
+          <li>Les allergies & les brûlures chimiques</li>
+          <li>Réussir ses poses d'extension de cils</li>
+          <li>Couleurs et tendance</li>
+          <li>Exercice pratique sur support</li>
+          <li>Démonstration formatrice</li>
+          <li>Pratique sur modèle accompagnée</li>
+        </ul>
+      </div>
+      <div class="fc-price-block">
+        <div class="fc-price">599€</div>
+        <div class="fc-price-vip">VIP 999€</div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-info"><div class="fc-info-icon">&#128336;</div><div><strong>2 jours</strong></div></div>
+        <div class="fc-info"><div class="fc-info-icon">&#128205;</div><div><strong>Marseille | Bouc-Bel-Air</strong></div></div>
+      </div>
+      <a class="fc-cta" href="mailto:barbarabeauty.formation@gmail.com?subject=Formation Volume Russe Expert">
+        Réserver cette formation <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+
+    <!-- 5. Formation 2en1 -->
+    <div class="formation-card">
+      <div class="fc-header">
+        <div class="fc-level">Formation initiale débutante</div>
+        <h3 class="fc-title">Formation 2en1<br><em>Cils à Cils & Volume Russe Préfaits</em></h3>
+      </div>
+      <div class="fc-body">
+        <div class="fc-program-title">Programme théorie & pratique</div>
+        <ul class="fc-list">
+          <li>Anatomie de l'œil et du cil naturel</li>
+          <li>Présentation de la technique cils à cils et volume russe préfaits</li>
+          <li>Découverte du matériel et son utilisation</li>
+          <li>Les différents types d'extensions (courbures/diamètres/longueurs)</li>
+          <li>Tout savoir sur la colle d'extensions de cils</li>
+          <li>Protocole de la pose d'extension de cils</li>
+          <li>Stylisme / Mapping</li>
+          <li>Les contres indications</li>
+          <li>Réussir ses poses d'extensions de cils</li>
+          <li>Les règles d'hygiène et de sécurité</li>
+          <li>Exercice pratique sur support</li>
+          <li>Démonstration formatrice</li>
+          <li>Pratique sur 2 modèles accompagnée</li>
+        </ul>
+      </div>
+      <div class="fc-price-block">
+        <div class="fc-price">999€</div>
+        <div class="fc-price-vip">VIP 1449€</div>
+      </div>
+      <div class="fc-footer">
+        <div class="fc-info"><div class="fc-info-icon">&#128336;</div><div><strong>3 jours</strong></div></div>
+        <div class="fc-info"><div class="fc-info-icon">&#128205;</div><div><strong>Marseille | Bouc-Bel-Air</strong></div></div>
+      </div>
+      <a class="fc-cta" href="mailto:barbarabeauty.formation@gmail.com?subject=Formation 2en1 Cils à Cils et Volume Russe">
+        Réserver cette formation <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── INFO BAND ── -->
+<section class="info-band">
+  <div class="ib-item">
+    <div class="ib-icon">&#128176;</div>
+    <div>
+      <div class="ib-label">Paiement</div>
+      <div class="ib-value">4x sans frais via PayPal</div>
+    </div>
+  </div>
+  <div class="ib-item">
+    <div class="ib-icon">&#127891;</div>
+    <div>
+      <div class="ib-label">Financement</div>
+      <div class="ib-value">Éligible FAFCEA</div>
+    </div>
+  </div>
+  <div class="ib-item">
+    <div class="ib-icon">&#9993;</div>
+    <div>
+      <div class="ib-label">Contact formation</div>
+      <div class="ib-value">barbarabeauty.formation@gmail.com</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2 class="cta-title">Prête à devenir<br><em>lash artist ?</em></h2>
+  <p class="cta-sub">Contactez-moi pour réserver votre formation ou pour toute question. Je vous réponds sous 24h.</p>
+  <a class="cta-btn" href="mailto:barbarabeauty.formation@gmail.com?subject=Demande d'information formation">
+    Me contacter <span class="arrow">&#8599;</span>
+  </a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-wrap">
+        <span class="footer-logo-top">BARBARA</span>
+        <div class="footer-logo-line"></div>
+        <span class="footer-logo-bottom">beauty</span>
+      </div>
+      <p class="footer-tagline">Formatrice certifiée CilsJo<br>Marseille | Bouc-Bel-Air</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Formations</div>
+      <ul class="footer-links">
+        <li><a href="#">Cils à Cils</a></li>
+        <li><a href="#">Volume Russe</a></li>
+        <li><a href="#">Volume Russe Expert</a></li>
+        <li><a href="#">2en1 Cils & Volume</a></li>
+        <li><a href="#">Coaching Privé</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="serenique-lash.html">Accueil</a></li>
+        <li><a href="serenique-lash.html#services">Services</a></li>
+        <li><a href="serenique-lash.html#about">À propos</a></li>
+        <li><a href="serenique-lash.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:barbarabeauty.formation@gmail.com">barbarabeauty.formation@gmail.com</a></li>
+        <li><a href="tel:0611193286">06.11.19.32.86</a></li>
+        <li><a href="https://barbarabeauty13.booksy.com/a/" target="_blank">Booksy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Barbara Beauty — Tous droits réservés</div>
+  </div>
+</footer>
+
+</body>
+</html>

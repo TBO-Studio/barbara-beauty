@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Barbara Beauty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F5F0EB;
+      --card: #FFFFFF;
+      --border: #E5DDD3;
+      --black: #1A1A1A;
+      --gold: #B8956A;
+      --gold-light: #D4BC9A;
+      --muted: #8A8278;
+      --danger: #D44A4A;
+      --success: #4A9A6A;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--black); }
+
+    /* ── LOGIN ── */
+    .login-overlay {
+      position: fixed; inset: 0; background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .login-overlay.hidden { display: none; }
+    .login-box {
+      background: var(--card); border-radius: 20px; padding: 48px;
+      width: 400px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .login-box h1 {
+      font-size: 1.4rem; font-weight: 600; margin-bottom: 8px;
+    }
+    .login-box p { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; }
+    .login-input {
+      width: 100%; padding: 14px 18px; border: 1.5px solid var(--border);
+      border-radius: 12px; font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-input:focus { border-color: var(--gold); }
+    .login-btn {
+      width: 100%; margin-top: 16px; padding: 14px;
+      background: var(--black); color: white; border: none;
+      border-radius: 12px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .login-btn:hover { background: #333; }
+    .login-error {
+      color: var(--danger); font-size: 0.8rem; margin-top: 12px;
+      display: none;
+    }
+
+    /* ── LAYOUT ── */
+    .app { display: none; }
+    .app.visible { display: block; }
+    .sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 240px;
+      background: var(--black); padding: 24px 0; overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 16px;
+    }
+    .sidebar-logo h2 {
+      color: white; font-size: 1rem; font-weight: 600; letter-spacing: 2px;
+    }
+    .sidebar-logo span {
+      color: var(--gold); font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 24px; color: rgba(255,255,255,0.5);
+      cursor: pointer; font-size: 0.85rem; font-weight: 500;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
+    .nav-item.active { color: var(--gold); background: rgba(184,149,106,0.08); }
+    .nav-item .icon { font-size: 1.1rem; width: 24px; text-align: center; }
+
+    .main { margin-left: 240px; padding: 32px; }
+    .topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 32px;
+    }
+    .topbar h1 { font-size: 1.5rem; font-weight: 700; }
+    .btn-save {
+      padding: 12px 28px; background: var(--gold); color: white;
+      border: none; border-radius: 12px; font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-save:hover { background: var(--gold-light); color: var(--black); }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card); border-radius: 16px;
+      padding: 28px; margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .card-title {
+      font-size: 0.95rem; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-title .badge {
+      background: rgba(184,149,106,0.12); color: var(--gold);
+      font-size: 0.7rem; font-weight: 600; padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field { margin-bottom: 18px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 12px 16px; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 0.88rem; font-family: inherit;
+      outline: none; transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field textarea:focus { border-color: var(--gold); }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field-row-3 { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; align-items: end; }
+
+    /* ── IMAGE UPLOAD ── */
+    .img-upload {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .img-preview {
+      width: 80px; height: 80px; border-radius: 12px;
+      background: var(--bg); border: 1.5px dashed var(--border);
+      overflow: hidden; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .img-preview img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .img-preview .placeholder { font-size: 1.5rem; opacity: 0.3; }
+    .btn-upload {
+      padding: 8px 16px; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-upload:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── LIST ITEMS ── */
+    .list-item {
+      background: var(--bg); border-radius: 12px;
+      padding: 18px; margin-bottom: 12px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .list-item:hover { border-color: var(--border); }
+    .list-item-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 12px;
+    }
+    .list-item-title { font-size: 0.85rem; font-weight: 600; }
+    .btn-delete {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(212,74,74,0.08); border: none;
+      color: var(--danger); cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .btn-delete:hover { background: rgba(212,74,74,0.15); }
+    .btn-add {
+      width: 100%; padding: 14px; background: transparent;
+      border: 1.5px dashed var(--border); border-radius: 12px;
+      font-size: 0.85rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-add:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      padding: 14px 24px; border-radius: 12px;
+      font-size: 0.85rem; font-weight: 600; color: white;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.3s; z-index: 9999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { background: var(--success); }
+    .toast.error { background: var(--danger); }
+
+    /* ── PREVIEW LINK ── */
+    .btn-preview {
+      padding: 10px 20px; background: transparent;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 0.82rem; font-weight: 600; color: var(--muted);
+      cursor: pointer; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-preview:hover { border-color: var(--gold); color: var(--gold); }
+
+    .logout-btn {
+      margin-top: auto; padding: 12px 24px;
+      color: rgba(255,255,255,0.3); cursor: pointer;
+      font-size: 0.8rem; transition: color 0.2s;
+      position: absolute; bottom: 24px; left: 0; right: 0;
+      text-align: center;
+    }
+    .logout-btn:hover { color: var(--danger); }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h1>Barbara Beauty</h1>
+    <p>Panneau d'administration</p>
+    <input class="login-input" type="password" id="loginPassword" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')login()" />
+    <button class="login-btn" onclick="login()">Se connecter</button>
+    <div class="login-error" id="loginError">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div class="app" id="app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <h2>BARBARA</h2>
+      <span>Administration</span>
+    </div>
+    <a class="nav-item active" data-tab="hero" onclick="switchTab('hero')">
+      <span class="icon">🏠</span> Accueil / Hero
+    </a>
+    <a class="nav-item" data-tab="services" onclick="switchTab('services')">
+      <span class="icon">✨</span> Services
+    </a>
+    <a class="nav-item" data-tab="formation" onclick="switchTab('formation')">
+      <span class="icon">🎓</span> Formation
+    </a>
+    <a class="nav-item" data-tab="about" onclick="switchTab('about')">
+      <span class="icon">👤</span> À propos
+    </a>
+    <a class="nav-item" data-tab="pricing" onclick="switchTab('pricing')">
+      <span class="icon">💰</span> Tarifs
+    </a>
+    <a class="nav-item" data-tab="testimonials" onclick="switchTab('testimonials')">
+      <span class="icon">💬</span> Avis clients
+    </a>
+    <a class="nav-item" data-tab="gallery" onclick="switchTab('gallery')">
+      <span class="icon">📸</span> Galerie
+    </a>
+    <a class="nav-item" data-tab="contact" onclick="switchTab('contact')">
+      <span class="icon">📍</span> Contact
+    </a>
+    <div class="logout-btn" onclick="logout()">Déconnexion</div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <h1 id="pageTitle">Accueil / Hero</h1>
+      <div style="display:flex;gap:12px">
+        <a class="btn-preview" href="/serenique-lash.html" target="_blank">👁 Voir le site</a>
+        <button class="btn-save" id="saveBtn" onclick="saveAll()">💾 Enregistrer</button>
+      </div>
+    </div>
+
+    <!-- ── HERO TAB ── -->
+    <div class="tab-content" data-tab="hero">
+      <div class="card">
+        <div class="card-title">Section d'accueil <span class="badge">Hero</span></div>
+        <div class="field">
+          <label>Sous-titre (tag)</label>
+          <input type="text" id="hero-tag" />
+        </div>
+        <div class="field">
+          <label>Titre principal (HTML autorisé : &lt;br&gt; &lt;em&gt;)</label>
+          <textarea id="hero-title" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>Lien Booksy (réservation)</label>
+          <input type="url" id="hero-booksyUrl" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SERVICES TAB ── -->
+    <div class="tab-content" data-tab="services" style="display:none">
+      <div class="card">
+        <div class="card-title">Services <span class="badge" id="servicesCount">0</span></div>
+        <div id="servicesList"></div>
+        <button class="btn-add" onclick="addService()">+ Ajouter un service</button>
+      </div>
+    </div>
+
+    <!-- ── FORMATION TAB ── -->
+    <div class="tab-content" data-tab="formation" style="display:none">
+      <div class="card">
+        <div class="card-title">Formation <span class="badge">Extensions de cils</span></div>
+        <div class="field">
+          <label>Titre (HTML autorisé)</label>
+          <textarea id="formation-title" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="formation-description" rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label>Points forts (un par ligne)</label>
+          <textarea id="formation-features" rows="5"></textarea>
+        </div>
+        <div class="field">
+          <label>Prix</label>
+          <input type="text" id="formation-price" />
+        </div>
+        <div class="field">
+          <label>Photo</label>
+          <div class="img-upload">
+            <div class="img-preview" id="formation-photo-preview"><span class="placeholder">📷</span></div>
+            <div>
+              <input type="file" id="formation-photo-input" accept="image/*" onchange="uploadImage(this, 'formation-photo')" style="display:none" />
+              <button class="btn-upload" onclick="document.getElementById('formation-photo-input').click()">Changer la photo</button>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:4px" id="formation-photo-name"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ABOUT TAB ── -->
+    <div class="tab-content" data-tab="about" style="display:none">
+      <div class="card">
+        <div class="card-title">À propos <span class="badge">Barbara</span></div>
+        <div class="field">
+          <label>Titre (HTML autorisé)</label>
+          <textarea id="about-title" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="about-description" rows="4"></textarea>
+        </div>
+        <div class="field">
+          <label>Photo</label>
+          <div class="img-upload">
+            <div class="img-preview" id="about-photo-preview"><span class="placeholder">📷</span></div>
+            <div>
+              <input type="file" id="about-photo-input" accept="image/*" onchange="uploadImage(this, 'about-photo')" style="display:none" />
+              <button class="btn-upload" onclick="document.getElementById('about-photo-input').click()">Changer la photo</button>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:4px" id="about-photo-name"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Statistiques <span class="badge">Chiffres clés</span></div>
+        <div id="statsList"></div>
+      </div>
+    </div>
+
+    <!-- ── PRICING TAB ── -->
+    <div class="tab-content" data-tab="pricing" style="display:none">
+      <div class="card">
+        <div class="card-title">Tarifs <span class="badge" id="pricingCount">0</span></div>
+        <div id="pricingList"></div>
+      </div>
+    </div>
+
+    <!-- ── TESTIMONIALS TAB ── -->
+    <div class="tab-content" data-tab="testimonials" style="display:none">
+      <div class="card">
+        <div class="card-title">Avis clients <span class="badge" id="testiCount">0</span></div>
+        <div id="testiList"></div>
+        <button class="btn-add" onclick="addTestimonial()">+ Ajouter un avis</button>
+      </div>
+    </div>
+
+    <!-- ── GALLERY TAB ── -->
+    <div class="tab-content" data-tab="gallery" style="display:none">
+      <div class="card">
+        <div class="card-title">Galerie photos <span class="badge" id="galleryCount">0</span></div>
+        <div id="galleryList" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px"></div>
+        <button class="btn-add" style="margin-top:12px" onclick="addGalleryItem()">+ Ajouter une photo</button>
+      </div>
+    </div>
+
+    <!-- ── CONTACT TAB ── -->
+    <div class="tab-content" data-tab="contact" style="display:none">
+      <div class="card">
+        <div class="card-title">Informations de contact <span class="badge">Coordonnées</span></div>
+        <div class="field">
+          <label>Adresse</label>
+          <input type="text" id="contact-address" />
+        </div>
+        <div class="field">
+          <label>Téléphone</label>
+          <input type="text" id="contact-phone" />
+        </div>
+        <div class="field">
+          <label>Lien Booksy</label>
+          <input type="url" id="contact-booksyUrl" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let content = {};
+let token = localStorage.getItem('bb_token') || '';
+
+// ── AUTH ──
+async function login() {
+  const pw = document.getElementById('loginPassword').value;
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: pw })
+  });
+  const data = await res.json();
+  if (data.success) {
+    token = data.token;
+    localStorage.setItem('bb_token', token);
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    loadContent();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function logout() {
+  token = '';
+  localStorage.removeItem('bb_token');
+  location.reload();
+}
+
+// ── LOAD ──
+async function loadContent() {
+  const res = await fetch('/api/content');
+  content = await res.json();
+  populateAll();
+}
+
+function populateAll() {
+  // Hero
+  document.getElementById('hero-tag').value = content.hero.tag;
+  document.getElementById('hero-title').value = content.hero.title;
+  document.getElementById('hero-booksyUrl').value = content.hero.booksyUrl;
+
+  // Formation
+  document.getElementById('formation-title').value = content.formation.title;
+  document.getElementById('formation-description').value = content.formation.description;
+  document.getElementById('formation-features').value = content.formation.features.join('\n');
+  document.getElementById('formation-price').value = content.formation.price;
+  setPreview('formation-photo', content.formation.photo);
+
+  // About
+  document.getElementById('about-title').value = content.about.title;
+  document.getElementById('about-description').value = content.about.description;
+  setPreview('about-photo', content.about.photo);
+  renderStats();
+
+  // Contact
+  document.getElementById('contact-address').value = content.contact.address;
+  document.getElementById('contact-phone').value = content.contact.phone;
+  document.getElementById('contact-booksyUrl').value = content.contact.booksyUrl;
+
+  renderServices();
+  renderPricing();
+  renderTestimonials();
+  renderGallery();
+}
+
+// ── SERVICES ──
+function renderServices() {
+  const el = document.getElementById('servicesList');
+  document.getElementById('servicesCount').textContent = content.services.length;
+  el.innerHTML = content.services.map((s, i) => `
+    <div class="list-item">
+      <div class="list-item-header">
+        <div class="list-item-title">${s.name || 'Nouveau service'}</div>
+        <button class="btn-delete" onclick="deleteService(${i})">×</button>
+      </div>
+      <div class="field-row" style="margin-bottom:12px">
+        <div class="field"><label>Nom</label><input type="text" value="${esc(s.name)}" onchange="content.services[${i}].name=this.value;renderServices()" /></div>
+        <div class="field"><label>Photo</label>
+          <div class="img-upload">
+            <div class="img-preview" id="svc-photo-${i}" style="width:50px;height:50px">${s.photo ? `<img src="/${s.photo}" />` : '<span class="placeholder">📷</span>'}</div>
+            <div>
+              <input type="file" id="svc-input-${i}" accept="image/*" onchange="uploadServicePhoto(this,${i})" style="display:none" />
+              <button class="btn-upload" onclick="document.getElementById('svc-input-${i}').click()">📷</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field"><label>Description</label><textarea rows="2" onchange="content.services[${i}].description=this.value">${esc(s.description)}</textarea></div>
+    </div>
+  `).join('');
+}
+
+function addService() {
+  content.services.push({ name: '', description: '', photo: '', beforeAfter: false });
+  renderServices();
+}
+function deleteService(i) {
+  content.services.splice(i, 1);
+  renderServices();
+}
+
+// ── PRICING ──
+function renderPricing() {
+  const el = document.getElementById('pricingList');
+  let total = 0;
+  content.pricing.forEach(c => total += c.items.length);
+  document.getElementById('pricingCount').textContent = total + ' prestations';
+
+  el.innerHTML = content.pricing.map((cat, ci) => `
+    <div style="margin-bottom:24px">
+      <div class="field-row" style="margin-bottom:12px">
+        <div class="field"><label>Catégorie</label><input type="text" value="${esc(cat.category)}" onchange="content.pricing[${ci}].category=this.value" /></div>
+        <div class="field"><label>Icône</label><input type="text" value="${esc(cat.icon)}" style="width:60px" onchange="content.pricing[${ci}].icon=this.value" /></div>
+      </div>
+      ${cat.items.map((item, ii) => `
+        <div class="list-item">
+          <div class="list-item-header">
+            <div class="list-item-title">${item.name || 'Nouvelle prestation'}</div>
+            <button class="btn-delete" onclick="content.pricing[${ci}].items.splice(${ii},1);renderPricing()">×</button>
+          </div>
+          <div class="field-row-3">
+            <div class="field"><label>Nom</label><input type="text" value="${esc(item.name)}" onchange="content.pricing[${ci}].items[${ii}].name=this.value" /></div>
+            <div class="field"><label>Détail</label><input type="text" value="${esc(item.detail)}" onchange="content.pricing[${ci}].items[${ii}].detail=this.value" /></div>
+            <div class="field"><label>Prix</label><input type="text" value="${esc(item.price)}" style="width:100px" onchange="content.pricing[${ci}].items[${ii}].price=this.value" /></div>
+          </div>
+        </div>
+      `).join('')}
+      <button class="btn-add" onclick="content.pricing[${ci}].items.push({name:'',detail:'',price:''});renderPricing()">+ Ajouter une prestation</button>
+    </div>
+  `).join('');
+}
+
+// ── TESTIMONIALS ──
+function renderTestimonials() {
+  const el = document.getElementById('testiList');
+  document.getElementById('testiCount').textContent = content.testimonials.length;
+  el.innerHTML = content.testimonials.map((t, i) => `
+    <div class="list-item">
+      <div class="list-item-header">
+        <div class="list-item-title">${t.author || 'Nouvel avis'}</div>
+        <button class="btn-delete" onclick="content.testimonials.splice(${i},1);renderTestimonials()">×</button>
+      </div>
+      <div class="field"><label>Texte de l'avis</label><textarea rows="2" onchange="content.testimonials[${i}].text=this.value">${esc(t.text)}</textarea></div>
+      <div class="field-row" style="margin-top:12px">
+        <div class="field"><label>Auteur</label><input type="text" value="${esc(t.author)}" onchange="content.testimonials[${i}].author=this.value;renderTestimonials()" /></div>
+        <div class="field"><label>Service</label><input type="text" value="${esc(t.service)}" onchange="content.testimonials[${i}].service=this.value" /></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addTestimonial() {
+  content.testimonials.push({ text: '', author: '', service: '', stars: 5 });
+  renderTestimonials();
+}
+
+// ── GALLERY ──
+function renderGallery() {
+  const el = document.getElementById('galleryList');
+  document.getElementById('galleryCount').textContent = content.gallery.length + ' photos';
+  el.innerHTML = content.gallery.map((g, i) => `
+    <div style="position:relative">
+      <div class="img-preview" style="width:100%;height:140px;border-radius:12px" id="gal-preview-${i}">
+        ${g.photo ? `<img src="/${g.photo}" />` : '<span class="placeholder">📷</span>'}
+      </div>
+      <input type="file" id="gal-input-${i}" accept="image/*" onchange="uploadGalleryPhoto(this,${i})" style="display:none" />
+      <button class="btn-upload" style="width:100%;margin-top:8px" onclick="document.getElementById('gal-input-${i}').click()">Choisir une photo</button>
+      <button class="btn-delete" style="position:absolute;top:8px;right:8px" onclick="content.gallery.splice(${i},1);renderGallery()">×</button>
+    </div>
+  `).join('');
+}
+
+function addGalleryItem() {
+  content.gallery.push({ photo: '', alt: 'Réalisation' });
+  renderGallery();
+}
+
+// ── STATS ──
+function renderStats() {
+  const el = document.getElementById('statsList');
+  el.innerHTML = content.about.stats.map((s, i) => `
+    <div class="list-item">
+      <div class="field-row">
+        <div class="field"><label>Valeur</label><input type="text" value="${esc(s.value)}" onchange="content.about.stats[${i}].value=this.value" /></div>
+        <div class="field"><label>Label</label><input type="text" value="${s.label.replace(/<br>/g, ' ')}" onchange="content.about.stats[${i}].label=this.value.replace(/ /g,'<br>')" /></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── UPLOAD ──
+async function uploadImage(input, field) {
+  const file = input.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('file', file);
+  const res = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: formData
+  });
+  const data = await res.json();
+  if (data.success) {
+    const section = field.split('-')[0]; // formation or about
+    content[section].photo = data.filename;
+    setPreview(field, data.filename);
+    toast('Photo uploadée !', 'success');
+  } else {
+    toast('Erreur upload : ' + data.message, 'error');
+  }
+}
+
+async function uploadServicePhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('file', file);
+  const res = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: formData
+  });
+  const data = await res.json();
+  if (data.success) {
+    content.services[i].photo = data.filename;
+    renderServices();
+    toast('Photo du service uploadée !', 'success');
+  }
+}
+
+async function uploadGalleryPhoto(input, i) {
+  const file = input.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('file', file);
+  const res = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + token },
+    body: formData
+  });
+  const data = await res.json();
+  if (data.success) {
+    content.gallery[i].photo = data.filename;
+    renderGallery();
+    toast('Photo ajoutée à la galerie !', 'success');
+  }
+}
+
+function setPreview(field, filename) {
+  const el = document.getElementById(field + '-preview');
+  const nameEl = document.getElementById(field + '-name');
+  if (el && filename) {
+    el.innerHTML = `<img src="/${filename}" />`;
+  }
+  if (nameEl) nameEl.textContent = filename || '';
+}
+
+// ── SAVE ──
+async function saveAll() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Enregistrement...';
+
+  // Collect simple fields
+  content.hero.tag = document.getElementById('hero-tag').value;
+  content.hero.title = document.getElementById('hero-title').value;
+  content.hero.booksyUrl = document.getElementById('hero-booksyUrl').value;
+
+  content.formation.title = document.getElementById('formation-title').value;
+  content.formation.description = document.getElementById('formation-description').value;
+  content.formation.features = document.getElementById('formation-features').value.split('\n').filter(f => f.trim());
+  content.formation.price = document.getElementById('formation-price').value;
+
+  content.about.title = document.getElementById('about-title').value;
+  content.about.description = document.getElementById('about-description').value;
+
+  content.contact.address = document.getElementById('contact-address').value;
+  content.contact.phone = document.getElementById('contact-phone').value;
+  content.contact.booksyUrl = document.getElementById('contact-booksyUrl').value;
+
+  try {
+    const res = await fetch('/api/content', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(content)
+    });
+    const data = await res.json();
+    if (data.success) {
+      toast('Modifications enregistrées ! Rafraîchissez le site pour voir les changements.', 'success');
+    } else {
+      toast('Erreur : ' + data.message, 'error');
+    }
+  } catch (e) {
+    toast('Erreur de connexion', 'error');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '💾 Enregistrer';
+}
+
+// ── TABS ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.tab-content[data-tab="${tab}"]`).style.display = 'block';
+  document.querySelector(`.nav-item[data-tab="${tab}"]`).classList.add('active');
+
+  const titles = {
+    hero: 'Accueil / Hero', services: 'Services', formation: 'Formation',
+    about: 'À propos', pricing: 'Tarifs', testimonials: 'Avis clients',
+    gallery: 'Galerie', contact: 'Contact'
+  };
+  document.getElementById('pageTitle').textContent = titles[tab] || tab;
+}
+
+// ── UTILS ──
+function esc(str) {
+  return (str || '').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast ' + type + ' show';
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ── INIT ──
+if (token) {
+  fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: token })
+  }).then(r => r.json()).then(data => {
+    if (data.success) {
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+      loadContent();
+    }
+  });
+}
+</script>
+</body>
+</html>

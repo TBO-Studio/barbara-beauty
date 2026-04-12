@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maquette 3 – Moderne & Chic</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:      #0A0A0A;
+      --off-white:  #F8F6F3;
+      --warm-gray:  #E8E4DE;
+      --mid-gray:   #9E9890;
+      --rose-gold:  #C4896F;
+      --rose-gold2: #D9A48A;
+      --cream:      #FBF8F4;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--black); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; padding: 24px 60px;
+      background: rgba(248,246,243,0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--warm-gray);
+    }
+    .nav-left { display: flex; gap: 32px; list-style: none; }
+    .nav-left a, .nav-right a {
+      color: var(--mid-gray); text-decoration: none;
+      font-size: 0.83rem; font-weight: 500; letter-spacing: 0.3px;
+      transition: color 0.25s;
+    }
+    .nav-left a:hover, .nav-right a:hover { color: var(--black); }
+    .nav-center {
+      text-align: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; letter-spacing: 1px; color: var(--black);
+    }
+    .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 24px; }
+    .nav-book {
+      background: var(--black); color: var(--cream);
+      padding: 10px 24px; font-size: 0.82rem; font-weight: 500;
+      border: none; cursor: pointer; letter-spacing: 0.3px;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.3s;
+    }
+    .nav-book:hover { background: var(--rose-gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; padding-top: 88px;
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .hero-left {
+      padding: 80px 60px; display: flex; flex-direction: column;
+      justify-content: center; background: var(--cream);
+    }
+    .hero-kicker {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--rose-gold);
+      margin-bottom: 28px; display: flex; align-items: center; gap: 14px;
+    }
+    .hero-kicker::after { content: ''; flex: 1; height: 1px; background: var(--warm-gray); }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 5vw, 4.8rem);
+      line-height: 1.08; margin-bottom: 32px; letter-spacing: -1px;
+    }
+    h1 i { color: var(--rose-gold); }
+    .hero-sub {
+      font-size: 1rem; color: var(--mid-gray); line-height: 1.8;
+      max-width: 400px; margin-bottom: 48px; font-weight: 300;
+    }
+    .cta-group { display: flex; gap: 14px; }
+    .btn-black {
+      background: var(--black); color: var(--cream);
+      padding: 16px 40px; border: none; cursor: pointer;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;
+      font-family: 'DM Sans', sans-serif; transition: all 0.3s;
+    }
+    .btn-black:hover { background: var(--rose-gold); }
+    .btn-ghost {
+      background: transparent; border: 1.5px solid var(--black);
+      color: var(--black); padding: 15px 36px; cursor: pointer;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;
+      font-family: 'DM Sans', sans-serif; transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--rose-gold); color: var(--rose-gold); }
+    .hero-meta {
+      margin-top: 60px; padding-top: 40px;
+      border-top: 1px solid var(--warm-gray);
+      display: flex; gap: 48px;
+    }
+    .meta-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem; color: var(--black); letter-spacing: -1px;
+    }
+    .meta-label { font-size: 0.78rem; color: var(--mid-gray); font-weight: 500; margin-top: 4px; }
+    .hero-right {
+      background: var(--black); position: relative; overflow: hidden;
+    }
+    .hero-img-full {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: linear-gradient(160deg, #1a1208 0%, #2c1e14 100%);
+    }
+    .hero-img-full .ph { font-size: 5rem; opacity: 0.25; }
+    .hero-img-full p { color: rgba(255,255,255,0.3); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; }
+    .hero-tag-corner {
+      position: absolute; top: 40px; left: 40px;
+      writing-mode: vertical-rl; text-orientation: mixed;
+      font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(196,137,111,0.6);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 40px; right: 40px;
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.3); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    }
+    .hero-scroll::before {
+      content: '';
+      width: 40px; height: 1px; background: rgba(196,137,111,0.5);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--black); overflow: hidden;
+      padding: 18px 0; border-top: 1px solid #1a1a1a;
+    }
+    .marquee-track {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); padding: 0 40px;
+    }
+    .marquee-dot { color: var(--rose-gold); margin: 0 8px; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SERVICES ── */
+    .services { padding: 100px 60px; background: var(--cream); }
+    .section-row {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 60px;
+    }
+    .section-kicker {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--rose-gold); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.5px; line-height: 1.15;
+    }
+    h2 i { color: var(--rose-gold); }
+    .section-row-right { color: var(--mid-gray); font-size: 0.88rem; max-width: 280px; text-align: right; line-height: 1.7; }
+    .services-list { display: flex; flex-direction: column; }
+    .service-row {
+      display: grid; grid-template-columns: 48px 1fr 120px 160px;
+      align-items: center; gap: 32px;
+      padding: 28px 0; border-bottom: 1px solid var(--warm-gray);
+      transition: all 0.3s; cursor: pointer;
+    }
+    .service-row:first-child { border-top: 1px solid var(--warm-gray); }
+    .service-row:hover { padding-left: 12px; }
+    .service-row:hover .service-row-name { color: var(--rose-gold); }
+    .service-row-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem; color: var(--warm-gray);
+    }
+    .service-row-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem; transition: color 0.3s;
+    }
+    .service-row-tag {
+      font-size: 0.72rem; color: var(--mid-gray);
+      background: var(--warm-gray); padding: 4px 12px;
+      text-align: center; letter-spacing: 0.5px;
+    }
+    .service-row-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem; text-align: right; color: var(--rose-gold);
+    }
+
+    /* ── SPLIT ABOUT ── */
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+    .about-img-side {
+      background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(160deg, #1a1208, #2c1e14);
+    }
+    .about-img-side .ph { font-size: 5rem; opacity: 0.2; }
+    .about-img-side p { color: rgba(255,255,255,0.3); font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 16px; }
+    .about-text-side {
+      background: var(--off-white); padding: 80px 70px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-text-side .section-kicker { margin-bottom: 16px; }
+    .about-text-side h2 { margin-bottom: 28px; }
+    .about-text-side p { color: var(--mid-gray); line-height: 1.9; margin-bottom: 16px; font-size: 0.95rem; }
+    .about-certs {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 36px;
+    }
+    .cert-tag {
+      background: var(--warm-gray); padding: 8px 16px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.3px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 80px 0 80px 60px; background: var(--cream); }
+    .gallery-head { padding-right: 60px; margin-bottom: 48px; }
+    .gallery-scroll-wrap { overflow: hidden; }
+    .gallery-scroll {
+      display: flex; gap: 16px;
+      overflow-x: auto; padding-right: 60px; padding-bottom: 16px;
+    }
+    .gallery-scroll::-webkit-scrollbar { height: 3px; }
+    .gallery-scroll::-webkit-scrollbar-thumb { background: var(--rose-gold); }
+    .g-photo {
+      flex: 0 0 300px; height: 380px;
+      background: var(--warm-gray);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; opacity: 0.5;
+      transition: opacity 0.3s; cursor: pointer;
+    }
+    .g-photo:hover { opacity: 1; }
+    .g-photo:nth-child(2n) { height: 320px; align-self: flex-end; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { padding: 80px 60px; background: var(--off-white); }
+    .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 60px; }
+    .testi-item { padding: 48px 40px; background: var(--cream); }
+    .testi-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; line-height: 1.7; color: var(--black);
+      margin-bottom: 24px; font-style: italic;
+    }
+    .testi-meta { display: flex; justify-content: space-between; align-items: center; }
+    .testi-author { font-size: 0.82rem; font-weight: 700; }
+    .testi-service { font-size: 0.75rem; color: var(--mid-gray); margin-top: 2px; }
+    .testi-stars { color: var(--rose-gold); font-size: 0.85rem; letter-spacing: 2px; }
+
+    /* ── BOOKING ── */
+    .booking { background: var(--black); padding: 100px 60px; }
+    .booking-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+    }
+    .booking-left .section-kicker { color: var(--rose-gold2); }
+    .booking-left h2 { color: var(--cream); }
+    .booking-left p { color: rgba(248,246,243,0.5); line-height: 1.8; margin-top: 20px; max-width: 380px; }
+    .contact-methods { margin-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+    .contact-method {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer; transition: all 0.3s;
+      text-decoration: none; color: inherit;
+    }
+    .contact-method:hover { border-color: var(--rose-gold); }
+    .cm-icon { font-size: 1.4rem; }
+    .cm-label { font-size: 0.72rem; color: rgba(248,246,243,0.4); letter-spacing: 1px; text-transform: uppercase; }
+    .cm-value { font-size: 0.95rem; color: var(--cream); font-weight: 500; margin-top: 2px; }
+    .booking-right { }
+    .form-label {
+      font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(248,246,243,0.4); display: block; margin-bottom: 10px;
+    }
+    .form-field {
+      width: 100%; padding: 16px 0;
+      background: transparent; border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: var(--cream); font-size: 0.95rem;
+      outline: none; font-family: 'DM Sans', sans-serif;
+      margin-bottom: 32px; transition: border-color 0.3s;
+    }
+    .form-field::placeholder { color: rgba(248,246,243,0.2); }
+    .form-field:focus { border-bottom-color: var(--rose-gold); }
+    .form-select {
+      width: 100%; padding: 16px 0;
+      background: transparent; border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: rgba(248,246,243,0.7); font-size: 0.95rem;
+      outline: none; font-family: 'DM Sans', sans-serif;
+      margin-bottom: 32px; cursor: pointer;
+      -webkit-appearance: none;
+    }
+    .form-select option { background: #1a1a1a; }
+    .btn-rose-gold {
+      background: var(--rose-gold); color: var(--cream);
+      padding: 18px 56px; border: none; cursor: pointer;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 1px;
+      font-family: 'DM Sans', sans-serif; transition: all 0.3s;
+    }
+    .btn-rose-gold:hover { background: var(--rose-gold2); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--cream); padding: 40px 60px;
+      border-top: 1px solid var(--warm-gray);
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    .footer-logo-f {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+    }
+    footer .center { text-align: center; font-size: 0.78rem; color: var(--mid-gray); }
+    footer .right { text-align: right; font-size: 0.78rem; color: var(--mid-gray); display: flex; gap: 20px; justify-content: flex-end; }
+    footer .right a { color: var(--mid-gray); text-decoration: none; transition: color 0.2s; }
+    footer .right a:hover { color: var(--rose-gold); }
+
+    /* ── LABEL ── */
+    .mockup-label {
+      position: fixed; bottom: 20px; right: 20px;
+      background: var(--rose-gold); color: var(--cream);
+      padding: 8px 16px; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 1px; z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+<div class="mockup-label">MAQUETTE 3 — MODERNE & CHIC</div>
+
+<!-- NAV -->
+<nav>
+  <ul class="nav-left">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">À propos</a></li>
+  </ul>
+  <div class="nav-center">LashStudio</div>
+  <div class="nav-right">
+    <a href="#gallery">Galerie</a>
+    <button class="nav-book">Réserver</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Artiste Cils Certifiée</div>
+    <h1>Votre regard,<br>notre <i>art.</i></h1>
+    <p class="hero-sub">Extensions de cils et soins sur mesure pour un regard inoubliable. Chaque pose est une création unique.</p>
+    <div class="cta-group">
+      <button class="btn-black">Réserver une séance</button>
+      <button class="btn-ghost">Nos services</button>
+    </div>
+    <div class="hero-meta">
+      <div>
+        <div class="meta-num">500+</div>
+        <div class="meta-label">Clientes satisfaites</div>
+      </div>
+      <div>
+        <div class="meta-num">4.9</div>
+        <div class="meta-label">Note sur 5 étoiles</div>
+      </div>
+      <div>
+        <div class="meta-num">3 ans</div>
+        <div class="meta-label">D'expérience</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-full">
+      <div class="ph">👁</div>
+      <p>Photo principale</p>
+    </div>
+    <div class="hero-tag-corner">Lash Artist · Paris</div>
+    <div class="hero-scroll">Défiler</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Extensions Classiques <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Volume Russe <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Rehaussement <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Teinture de Cils <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Pack Mariée <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Fill-in Retouche <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Extensions Classiques <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Volume Russe <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Rehaussement <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Teinture de Cils <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Pack Mariée <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Fill-in Retouche <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-row">
+    <div>
+      <div class="section-kicker">Nos prestations</div>
+      <h2>Ce que<br>je <i>propose</i></h2>
+    </div>
+    <div class="section-row-right">Tous les soins sont réalisés avec des produits premium, sans danger pour vos cils naturels.</div>
+  </div>
+  <div class="services-list">
+    <div class="service-row">
+      <div class="service-row-num">01</div>
+      <div class="service-row-name">Extensions Classiques</div>
+      <div class="service-row-tag">2h – 2h30</div>
+      <div class="service-row-price">80€</div>
+    </div>
+    <div class="service-row">
+      <div class="service-row-num">02</div>
+      <div class="service-row-name">Volume Russe</div>
+      <div class="service-row-tag">2h30 – 3h</div>
+      <div class="service-row-price">110€</div>
+    </div>
+    <div class="service-row">
+      <div class="service-row-num">03</div>
+      <div class="service-row-name">Mega Volume</div>
+      <div class="service-row-tag">3h – 4h</div>
+      <div class="service-row-price">140€</div>
+    </div>
+    <div class="service-row">
+      <div class="service-row-num">04</div>
+      <div class="service-row-name">Rehaussement de Cils</div>
+      <div class="service-row-tag">1h</div>
+      <div class="service-row-price">65€</div>
+    </div>
+    <div class="service-row">
+      <div class="service-row-num">05</div>
+      <div class="service-row-name">Retouche Fill-in</div>
+      <div class="service-row-tag">1h – 1h30</div>
+      <div class="service-row-price">45€</div>
+    </div>
+    <div class="service-row">
+      <div class="service-row-num">06</div>
+      <div class="service-row-name">Pack Mariée</div>
+      <div class="service-row-tag">Sur devis</div>
+      <div class="service-row-price">180€+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-side">
+    <div class="ph">🌸</div>
+    <p>Photo portrait</p>
+  </div>
+  <div class="about-text-side">
+    <div class="section-kicker">À propos</div>
+    <h2>Passionnée,<br><i>précise, créative.</i></h2>
+    <p>Certifiée et formée aux techniques les plus avancées, je mets mon expertise au service de votre regard depuis [ANNÉE]. Chaque cliente reçoit une attention unique et personnalisée.</p>
+    <p>Mon studio est un espace où vous pouvez vous détendre et vous faire chouchouter, en toute confiance.</p>
+    <div class="about-certs">
+      <div class="cert-tag">Certifiée Lash Artist</div>
+      <div class="cert-tag">Formation Europe</div>
+      <div class="cert-tag">Produits Premium</div>
+      <div class="cert-tag">500+ poses</div>
+    </div>
+    <button class="btn-black">Me contacter</button>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-head">
+    <div class="section-kicker">Portfolio</div>
+    <h2>Mes <i>réalisations</i></h2>
+  </div>
+  <div class="gallery-scroll-wrap">
+    <div class="gallery-scroll">
+      <div class="g-photo">📸</div>
+      <div class="g-photo">📸</div>
+      <div class="g-photo">📸</div>
+      <div class="g-photo">📸</div>
+      <div class="g-photo">📸</div>
+      <div class="g-photo">📸</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div>
+    <div class="section-kicker">Témoignages</div>
+    <h2>Elles ont <i>adoré</i></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-item">
+      <p class="testi-quote">"Un résultat absolument magnifique. Je ne suis jamais repartie déçue. Le soin apporté à chaque cil est impressionnant."</p>
+      <div class="testi-meta">
+        <div>
+          <div class="testi-author">Sophie M.</div>
+          <div class="testi-service">Volume Russe</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testi-item">
+      <p class="testi-quote">"Très professionnelle, à l'écoute et ultra-précise dans son travail. Mon regard a été complètement transformé."</p>
+      <div class="testi-meta">
+        <div>
+          <div class="testi-author">Camille R.</div>
+          <div class="testi-service">Extensions Classiques</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testi-item">
+      <p class="testi-quote">"Le rehaussement tient depuis 8 semaines ! Je recommande à 100% cette technique. Fini le mascara le matin."</p>
+      <div class="testi-meta">
+        <div>
+          <div class="testi-author">Julie T.</div>
+          <div class="testi-service">Rehaussement</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+    <div class="testi-item">
+      <p class="testi-quote">"Elle a fait mes cils pour mon mariage — toutes mes invitées me demandaient ce que j'avais fait. Merci infiniment !"</p>
+      <div class="testi-meta">
+        <div>
+          <div class="testi-author">Laura D.</div>
+          <div class="testi-service">Pack Mariée</div>
+        </div>
+        <div class="testi-stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="contact">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <div class="section-kicker">Rendez-vous</div>
+      <h2 style="color:var(--cream)">Prête à <i>transformer</i><br>votre regard ?</h2>
+      <p>Remplissez le formulaire ou contactez-moi directement. Je reviens vers vous dans les 24h.</p>
+      <div class="contact-methods">
+        <a class="contact-method" href="#">
+          <span class="cm-icon">📸</span>
+          <div>
+            <div class="cm-label">Instagram</div>
+            <div class="cm-value">@nom_boutique</div>
+          </div>
+        </a>
+        <a class="contact-method" href="#">
+          <span class="cm-icon">💬</span>
+          <div>
+            <div class="cm-label">WhatsApp</div>
+            <div class="cm-value">+33 6 XX XX XX XX</div>
+          </div>
+        </a>
+        <a class="contact-method" href="#">
+          <span class="cm-icon">📍</span>
+          <div>
+            <div class="cm-label">Adresse</div>
+            <div class="cm-value">Paris, France</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="booking-right">
+      <label class="form-label">Prénom</label>
+      <input class="form-field" type="text" placeholder="Marie" />
+      <label class="form-label">Instagram ou téléphone</label>
+      <input class="form-field" type="text" placeholder="@votre_instagram" />
+      <label class="form-label">Prestation souhaitée</label>
+      <select class="form-select">
+        <option value="" disabled selected>Choisir une prestation...</option>
+        <option>Extensions Classiques</option>
+        <option>Volume Russe</option>
+        <option>Mega Volume</option>
+        <option>Rehaussement de Cils</option>
+        <option>Retouche Fill-in</option>
+        <option>Pack Mariée</option>
+      </select>
+      <label class="form-label">Message (facultatif)</label>
+      <input class="form-field" type="text" placeholder="Dites-moi ce que vous souhaitez..." />
+      <button class="btn-rose-gold">Envoyer ma demande →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-f">LashStudio</div>
+  <div class="center">© 2025 — Tous droits réservés</div>
+  <div class="right">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

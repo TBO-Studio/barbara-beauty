@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barbara Beauty — Onglerie & Beauté du Regard | Bouc-Bel-Air</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --beige:     #F5F0EB;
+      --beige2:    #EDE7DF;
+      --beige3:    #E5DDD3;
+      --black:     #1A1A1A;
+      --black2:    #111111;
+      --gold:      #B8956A;
+      --gold-light:#D4BC9A;
+      --gold-dark: #9A7B55;
+      --white:     #FFFFFF;
+      --muted:     #8A8278;
+      --text:      #1A1A1A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--beige); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    .nav-wrap {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 200; width: calc(100% - 48px); max-width: 1200px;
+    }
+    nav {
+      background: var(--white);
+      border-radius: 60px;
+      padding: 10px 20px 10px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1;
+    }
+    .nav-logo-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; letter-spacing: 3px;
+      color: var(--black); text-transform: uppercase;
+    }
+    .nav-logo-line {
+      width: 100%; height: 1px; background: var(--black); margin: 1px 0;
+    }
+    .nav-logo-bottom {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1rem; color: var(--black); margin-top: -2px;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; color: var(--text);
+      text-decoration: none; padding: 8px 14px; border-radius: 50px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover { background: var(--beige); }
+    .nav-cta {
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50px;
+      padding: 12px 26px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: background 0.3s; text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--black2); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      overflow: hidden; display: flex; align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80') center center / cover no-repeat;
+    }
+    .hero-bg-icon { display: none; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.1) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 60px 80px; width: 100%;
+    }
+    .hero-tag {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      margin-bottom: 24px;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6.5vw, 6rem);
+      font-weight: 400; line-height: 1.05;
+      color: var(--white); max-width: 800px;
+      margin-bottom: 40px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-btns { display: flex; gap: 16px; align-items: center; }
+    .btn-pill-light {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--white); color: var(--black);
+      border: none; border-radius: 50px; padding: 14px 24px 14px 28px;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: all 0.3s;
+      text-decoration: none;
+    }
+    .btn-pill-light:hover { background: var(--beige); }
+    .btn-pill-light .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--black); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+    .btn-pill-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: 50px; padding: 14px 28px;
+      color: var(--white); font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.3s;
+      text-decoration: none;
+    }
+    .btn-pill-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+    /* ── SERVICE CARDS ── */
+    .service-cards { padding: 80px 60px; background: var(--beige); }
+    .sc-header { text-align: center; margin-bottom: 48px; }
+    .sc-grid {
+      display: flex; gap: 12px;
+      align-items: center;
+      justify-content: center;
+      max-height: 320px;
+    }
+    .sc-card {
+      border-radius: 16px; overflow: hidden;
+      position: relative; cursor: pointer;
+      flex: 1;
+      height: 220px;
+      transition: flex 0.45s cubic-bezier(0.4,0,0.2,1), height 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .sc-card:hover { flex: 1.8; height: 280px; }
+    .sc-photo {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #D4895A, #B8653A);
+    }
+    .sc-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .sc-photo.ba img {
+      object-fit: fill;
+    }
+    .sc-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+      padding: 24px; display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .sc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; color: var(--white);
+      white-space: nowrap;
+    }
+    .sc-desc {
+      font-size: 0.8rem; color: rgba(255,255,255,0.75);
+      margin-top: 10px; line-height: 1.6; font-weight: 300;
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.4s ease, opacity 0.35s ease;
+    }
+    .sc-card:hover .sc-desc { max-height: 120px; opacity: 1; }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 80px 60px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center; background: var(--beige);
+    }
+    .about-img {
+      border-radius: 24px; overflow: hidden; height: 580px;
+    }
+    .about-img img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 65%;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+    .tag {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .tag-center { justify-content: center; }
+    .tag-white { color: rgba(255,255,255,0.5); }
+    .tag-white::before { background: var(--gold-light); }
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 400; line-height: 1.1; color: var(--text);
+      margin-bottom: 24px;
+    }
+    .about-title em { font-style: italic; }
+    .about-body { font-size: 0.88rem; color: var(--muted); line-height: 1.95; font-weight: 300; margin-bottom: 36px; }
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50px; padding: 14px 24px 14px 28px;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: background 0.3s;
+      text-decoration: none;
+    }
+    .btn-dark:hover { background: var(--black2); }
+    .btn-dark .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-stats {
+      display: flex; gap: 48px; margin-top: 48px;
+      padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 400; color: var(--black); line-height: 1;
+    }
+    .stat-l { font-size: 0.75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+    }
+    .section-title em { font-style: italic; color: var(--gold-dark); }
+
+    /* ── PROCESS ── */
+    .process {
+      background: var(--black); padding: 100px 60px;
+    }
+    .process-header { text-align: center; margin-bottom: 80px; }
+    .process-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      font-weight: 400; color: var(--white); line-height: 1.1;
+    }
+    .process-title em { font-style: italic; color: var(--gold-light); }
+    .process-steps { display: flex; flex-direction: column; gap: 0; max-width: 900px; margin: 0 auto; position: relative; }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      top: 0; bottom: 0; width: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    .process-steps::after {
+      content: '';
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      top: 0; width: 2px;
+      height: var(--progress, 0%);
+      background: var(--gold);
+      z-index: 1;
+    }
+    .process-step {
+      display: grid; grid-template-columns: 1fr 80px 1fr;
+      gap: 0; align-items: start; min-height: 280px;
+    }
+    .process-step:nth-child(even) .ps-img { order: 3; }
+    .process-step:nth-child(even) .ps-center { order: 2; }
+    .process-step:nth-child(even) .ps-text { order: 1; text-align: right; align-items: flex-end; }
+    .ps-img {
+      border-radius: 20px; overflow: hidden; height: 240px;
+      background: var(--black2);
+      align-self: center;
+    }
+    .ps-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .ps-center {
+      display: flex; flex-direction: column;
+      align-items: center; padding-top: 24px;
+    }
+    .ps-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 0.9rem; font-weight: 500;
+      flex-shrink: 0; position: relative; z-index: 2;
+      transition: all 0.4s;
+    }
+    .ps-num.active {
+      background: var(--gold); border-color: var(--gold);
+      color: var(--black);
+    }
+    .ps-line {
+      width: 1px; flex: 1; min-height: 160px;
+      background: transparent; margin: 8px 0;
+    }
+    .ps-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 32px 24px; align-self: center;
+    }
+    .ps-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 400; color: var(--white);
+      margin-bottom: 14px;
+    }
+    .ps-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; }
+
+    /* ── PRICING ── */
+    .pricing { padding: 80px 60px; background: var(--beige2); }
+    .pricing-head { text-align: center; margin-bottom: 60px; }
+    .pricing-categories { display: flex; flex-direction: column; gap: 48px; }
+    .pricing-cat-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 400; color: var(--black);
+      margin-bottom: 24px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .pricing-cat-title em { font-style: italic; color: var(--gold-dark); }
+    .pricing-list { display: flex; flex-direction: column; gap: 0; }
+    .pricing-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.2s;
+    }
+    .pricing-row:hover { padding-left: 12px; }
+    .pr-name { font-size: 0.92rem; font-weight: 500; color: var(--text); }
+    .pr-detail { font-size: 0.78rem; color: var(--muted); margin-top: 3px; font-weight: 300; }
+    .pr-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 500; color: var(--black);
+      white-space: nowrap;
+    }
+    .btn-booksy {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50px; padding: 16px 28px 16px 32px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: background 0.3s;
+      text-decoration: none; margin-top: 40px;
+    }
+    .btn-booksy:hover { background: var(--black2); }
+    .btn-booksy .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── FORMATION ── */
+    .formation { padding: 80px 60px; background: var(--black); }
+    .formation-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .formation-img {
+      border-radius: 24px; overflow: hidden; height: 500px;
+      background: #1A1A1A;
+    }
+    .formation-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+    .formation-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400; color: var(--white); line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .formation-title em { font-style: italic; color: var(--gold-light); }
+    .formation-body { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9; font-weight: 300; margin-bottom: 32px; }
+    .formation-features { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 14px; }
+    .formation-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 300;
+    }
+    .formation-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--gold); color: var(--white);
+      border: none; border-radius: 50px; padding: 16px 28px 16px 32px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: background 0.3s;
+      text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--gold-dark); }
+    .btn-gold .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .formation-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 400; color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    .formation-price-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-bottom: 28px; }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 80px 60px; background: var(--beige); }
+    .gallery-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: 12px;
+    }
+    .g-item {
+      border-radius: 16px; overflow: hidden;
+      background: linear-gradient(145deg, #C4B09A, #8A7060);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; cursor: pointer; transition: all 0.3s;
+    }
+    .g-item:hover { transform: scale(1.01); }
+    .g-item:nth-child(1) { grid-column: span 2; grid-row: span 2; font-size: 3rem; }
+    .g-item:nth-child(5) { grid-column: span 2; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { padding: 80px 60px; background: var(--beige2); }
+    .testi-head { text-align: center; margin-bottom: 60px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card {
+      background: var(--white); border-radius: 20px;
+      padding: 40px 32px; transition: all 0.3s;
+    }
+    .testi-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-4px); }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 20px; }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-style: italic; font-weight: 300;
+      color: var(--text); line-height: 1.7; margin-bottom: 28px;
+    }
+    .testi-author { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .testi-service { font-size: 0.72rem; color: var(--muted); margin-top: 4px; letter-spacing: 0.5px; }
+
+    /* ── CONTACT ── */
+    .contact { padding: 80px 60px; background: var(--beige); }
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 400; line-height: 1.1; margin-bottom: 20px;
+    }
+    .contact-title em { font-style: italic; color: var(--gold-dark); }
+    .contact-body { font-size: 0.88rem; color: var(--muted); line-height: 1.9; font-weight: 300; margin-bottom: 40px; }
+    .contact-list { display: flex; flex-direction: column; gap: 0; }
+    .contact-row {
+      display: flex; align-items: center; gap: 18px;
+      padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .cr-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--beige2); display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cr-label { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .cr-value { font-size: 0.9rem; color: var(--text); font-weight: 500; margin-top: 2px; }
+    .cr-value a { color: var(--text); text-decoration: none; }
+    .cr-value a:hover { color: var(--gold-dark); }
+    .map-placeholder {
+      border-radius: 20px; overflow: hidden; height: 100%; min-height: 400px;
+      background: var(--beige2); display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .map-placeholder-icon { font-size: 3rem; opacity: 0.25; }
+    .map-placeholder-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black2); color: var(--white);
+      padding: 72px 60px 40px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px; padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 40px;
+    }
+    .footer-logo-wrap {
+      display: flex; flex-direction: column; line-height: 1; margin-bottom: 16px;
+    }
+    .footer-logo-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; letter-spacing: 4px;
+      color: var(--white); text-transform: uppercase;
+    }
+    .footer-logo-line { width: 100%; max-width: 180px; height: 1px; background: rgba(255,255,255,0.3); margin: 2px 0; }
+    .footer-logo-bottom {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-top: -2px;
+    }
+    .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.8; font-weight: 300; }
+    .footer-col-title {
+      font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 20px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.4);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--gold); }
+    .footer-social a svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.45); transition: fill 0.2s; }
+    .footer-social a:hover svg { fill: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<div class="nav-wrap">
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-top">BARBARA</span>
+      <div class="nav-logo-line"></div>
+      <span class="nav-logo-bottom">beauty</span>
+    </div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="formation.html">Formation</a>
+      <a href="#about">À propos</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+  </nav>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-icon">&#10024;</div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Onglerie & Beauté du Regard — Bouc-Bel-Air</div>
+    <h1 class="hero-title">
+      Sublimez votre<br>regard avec <em>Barbara Beauty.</em>
+    </h1>
+    <div class="hero-btns">
+      <a class="btn-pill-light" href="https://barbarabeauty13.booksy.com/a/" target="_blank">
+        Prendre rendez-vous
+        <span class="arrow">&#8599;</span>
+      </a>
+      <a class="btn-pill-outline" href="#services">Voir les prestations</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE CARDS ── -->
+<section class="service-cards" id="services">
+  <div class="sc-header">
+    <div class="tag tag-center">Nos prestations</div>
+    <h2 class="section-title">Des soins pour <em>sublimer votre beauté</em></h2>
+  </div>
+  <div class="sc-grid">
+    <div class="sc-card">
+      <div class="sc-photo"><img src="vernissemipermanent.png" alt="Vernis Semi-Permanent" /></div>
+      <div class="sc-overlay">
+        <div class="sc-name">Vernis Semi-Permanent</div>
+        <div class="sc-desc">Pose de vernis semi-permanent pour des ongles impeccables pendant 2 à 3 semaines.</div>
+      </div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-photo"><img src="cilacil.png" alt="Extensions Cil à Cil" /></div>
+      <div class="sc-overlay">
+        <div class="sc-name">Extensions Cil à Cil</div>
+        <div class="sc-desc">La méthode classique pour un regard naturel et élégant au quotidien.</div>
+      </div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-photo"><img src="russe.png" alt="Volume Russe" /></div>
+      <div class="sc-overlay">
+        <div class="sc-name">Volume Russe</div>
+        <div class="sc-desc">Des bouquets de cils ultra-fins pour un effet volumé spectaculaire et glamour.</div>
+      </div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-photo ba"><img src="lashlift.png" alt="Lash Lift" /></div>
+      <div class="sc-overlay">
+        <div class="sc-name">Lash Lift</div>
+        <div class="sc-desc">Rehaussement de vos cils naturels — l'effet mascara sans mascara.</div>
+      </div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-photo ba"><img src="browlift.png" alt="Brow Lift" /></div>
+      <div class="sc-overlay">
+        <div class="sc-name">Brow Lift</div>
+        <div class="sc-desc">Restructuration et rehaussement de vos sourcils pour un regard ouvert.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMATION ── -->
+<section class="formation" id="formation">
+  <div class="formation-inner">
+    <div class="formation-img">
+      <img src="barbara1.jpg" alt="Barbara — Formation Extensions de Cils" />
+    </div>
+    <div>
+      <div class="tag tag-white">Formation</div>
+      <h2 class="formation-title">
+        Formation<br><em>Extensions de Cils</em>
+      </h2>
+      <p class="formation-body">Vous souhaitez devenir lash artist ? Je propose des formations complètes pour maîtriser les techniques d'extension de cils, de la théorie à la pratique.</p>
+      <ul class="formation-features">
+        <li>Apprentissage des techniques cil à cil et volume</li>
+        <li>Pratique sur modèles</li>
+        <li>Kit de départ inclus</li>
+        <li>Suivi post-formation</li>
+        <li>Certificat de formation</li>
+      </ul>
+      <div class="formation-price">Sur devis</div>
+      <div class="formation-price-note">Paiement en ligne sécurisé disponible</div>
+      <a class="btn-gold" href="#contact">
+        Me contacter pour la formation
+        <span class="arrow">&#8599;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-img">
+    <img src="barbara2.png" alt="Barbara en plein travail — Barbara Beauty" />
+  </div>
+  <div>
+    <div class="tag">À propos</div>
+    <h2 class="about-title">
+      La beauté du regard,<br>c'est <em>ma passion.</em>
+    </h2>
+    <p class="about-body">Installée à Bouc-Bel-Air, je vous accueille dans un espace cosy et chaleureux pour prendre soin de vous. Spécialisée en extensions de cils et onglerie, je mets un point d'honneur à offrir des prestations sur mesure, adaptées à votre style et à la morphologie de votre regard.</p>
+    <a class="btn-dark" href="https://barbarabeauty13.booksy.com/a/" target="_blank">
+      Prendre rendez-vous
+      <span class="arrow">&#8599;</span>
+    </a>
+    <div class="about-stats">
+      <div>
+        <div class="stat-n">500+</div>
+        <div class="stat-l">Clientes<br>satisfaites</div>
+      </div>
+      <div>
+        <div class="stat-n">4.9&#9733;</div>
+        <div class="stat-l">Note<br>moyenne</div>
+      </div>
+      <div>
+        <div class="stat-n">100%</div>
+        <div class="stat-l">Produits<br>professionnels</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ── -->
+<section class="process">
+  <div class="process-header">
+    <div class="tag tag-center tag-white">Votre expérience</div>
+    <h2 class="process-title">
+      Votre séance beauté,<br><em>étape par étape.</em>
+    </h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="ps-img"><img src="https://images.unsplash.com/photo-1770871820934-daf713c304af?w=800&q=80" alt="Réservation en ligne" /></div>
+      <div class="ps-center">
+        <div class="ps-num">1</div>
+        <div class="ps-line"></div>
+      </div>
+      <div class="ps-text">
+        <div class="ps-name">Réservation en ligne</div>
+        <p class="ps-desc">Choisissez votre prestation et votre créneau directement sur Booksy. Confirmation instantanée.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="ps-img"><img src="https://images.unsplash.com/photo-1599387737838-660b75526801?w=800&q=80" alt="Consultation personnalisée" /></div>
+      <div class="ps-center">
+        <div class="ps-num">2</div>
+        <div class="ps-line"></div>
+      </div>
+      <div class="ps-text">
+        <div class="ps-name">Consultation personnalisée</div>
+        <p class="ps-desc">À votre arrivée, on discute de vos envies et je vous conseille la prestation la plus adaptée.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="ps-img"><img src="barbara3.png" alt="La prestation" /></div>
+      <div class="ps-center">
+        <div class="ps-num">3</div>
+        <div class="ps-line"></div>
+      </div>
+      <div class="ps-text">
+        <div class="ps-name">La prestation</div>
+        <p class="ps-desc">Installez-vous confortablement et profitez d'un moment de détente pendant que je travaille avec précision.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="ps-img"><img src="russe.png" alt="Résultat & Conseils" /></div>
+      <div class="ps-center">
+        <div class="ps-num">4</div>
+      </div>
+      <div class="ps-text">
+        <div class="ps-name">Résultat & Conseils</div>
+        <p class="ps-desc">Repartez sublimée avec des conseils d'entretien personnalisés pour profiter au maximum du résultat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="pricing" id="tarifs">
+  <div class="pricing-head">
+    <div class="tag tag-center">Tarifs</div>
+    <h2 class="section-title">Nos <em>prestations & tarifs</em></h2>
+  </div>
+  <div class="pricing-categories">
+    <!-- Onglerie -->
+    <div>
+      <h3 class="pricing-cat-title">&#128133; <em>Onglerie</em></h3>
+      <div class="pricing-list">
+        <div class="pricing-row">
+          <div>
+            <div class="pr-name">Vernis Semi-Permanent</div>
+            <div class="pr-detail">Pose complète — tenue 2 à 3 semaines</div>
+          </div>
+          <div class="pr-price">Sur devis</div>
+        </div>
+      </div>
+    </div>
+    <!-- Beaute du regard -->
+    <div>
+      <h3 class="pricing-cat-title">&#10024; Beauté du <em>Regard</em></h3>
+      <div class="pricing-list">
+        <div class="pricing-row">
+          <div>
+            <div class="pr-name">Extensions de cils — Méthode Cil à Cil</div>
+            <div class="pr-detail">Pose complète — résultat naturel et élégant</div>
+          </div>
+          <div class="pr-price">Sur devis</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pr-name">Extensions de cils — Volume Russe</div>
+            <div class="pr-detail">Pose complète — volume spectaculaire</div>
+          </div>
+          <div class="pr-price">Sur devis</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pr-name">Lash Lift</div>
+            <div class="pr-detail">Rehaussement de cils naturels — tenue 6 à 8 semaines</div>
+          </div>
+          <div class="pr-price">Sur devis</div>
+        </div>
+        <div class="pricing-row">
+          <div>
+            <div class="pr-name">Brow Lift</div>
+            <div class="pr-detail">Rehaussement et restructuration des sourcils</div>
+          </div>
+          <div class="pr-price">Sur devis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center">
+    <a class="btn-booksy" href="https://barbarabeauty13.booksy.com/a/" target="_blank">
+      Réserver sur Booksy
+      <span class="arrow">&#8599;</span>
+    </a>
+  </div>
+</section>
+
+<!-- Formation déplacée plus haut -->
+
+<!-- ── GALLERY ── -->
+<section class="gallery" id="galerie">
+  <div class="gallery-head">
+    <div>
+      <div class="tag">Portfolio</div>
+      <h2 class="section-title" style="margin-top:12px">Mes <em>réalisations</em></h2>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item">&#128247;</div>
+    <div class="g-item">&#128247;</div>
+    <div class="g-item">&#128247;</div>
+    <div class="g-item">&#128247;</div>
+    <div class="g-item">&#128247;</div>
+    <div class="g-item">&#128247;</div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="testi-head">
+    <div class="tag tag-center">Avis clients</div>
+    <h2 class="section-title" style="margin-top:12px">Ce qu'elles <em>disent de moi</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testi-text">"Un travail incroyable ! Mes cils sont magnifiques, naturels et parfaitement posés. Barbara est une vraie artiste, je recommande à 100%."</p>
+      <div class="testi-author">Sophie M.</div>
+      <div class="testi-service">Extensions Volume Russe</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testi-text">"Super expérience ! L'accueil est top, le cadre est agréable et le résultat est au-delà de mes attentes. Mes ongles sont parfaits."</p>
+      <div class="testi-author">Camille R.</div>
+      <div class="testi-service">Vernis Semi-Permanent</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testi-text">"Mon lash lift est incroyable, je n'ai plus besoin de mascara ! Barbara prend le temps de bien expliquer et le résultat est top."</p>
+      <div class="testi-author">Julie T.</div>
+      <div class="testi-service">Lash Lift</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="tag">Contact</div>
+      <h2 class="contact-title">
+        Envie de prendre<br><em>rendez-vous ?</em>
+      </h2>
+      <p class="contact-body">Retrouvez-moi à Bouc-Bel-Air ou contactez-moi directement. Réservez en ligne via Booksy pour un créneau garanti.</p>
+      <div class="contact-list">
+        <div class="contact-row">
+          <div class="cr-icon">&#128205;</div>
+          <div>
+            <div class="cr-label">Adresse</div>
+            <div class="cr-value">58 route de Cabriès, 13320 Bouc-Bel-Air</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="cr-icon">&#128222;</div>
+          <div>
+            <div class="cr-label">Téléphone</div>
+            <div class="cr-value"><a href="tel:0611193286">06.11.19.32.86</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="cr-icon">&#128197;</div>
+          <div>
+            <div class="cr-label">Réservation en ligne</div>
+            <div class="cr-value"><a href="https://barbarabeauty13.booksy.com/a/" target="_blank">Booksy — Réserver maintenant</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <div class="map-placeholder-icon">&#128205;</div>
+      <div class="map-placeholder-label">Google Maps</div>
+      <div style="font-size:0.78rem; color:var(--muted); margin-top:4px">58 route de Cabriès, Bouc-Bel-Air</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-wrap">
+        <span class="footer-logo-top">BARBARA</span>
+        <div class="footer-logo-line"></div>
+        <span class="footer-logo-bottom">beauty</span>
+      </div>
+      <p class="footer-tagline">Onglerie & Beauté du Regard<br>58 route de Cabriès, 13320 Bouc-Bel-Air</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Vernis Semi-Permanent</a></li>
+        <li><a href="#services">Extensions Cil à Cil</a></li>
+        <li><a href="#services">Volume Russe</a></li>
+        <li><a href="#services">Lash Lift</a></li>
+        <li><a href="#services">Brow Lift</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#tarifs">Tarifs</a></li>
+        <li><a href="formation.html">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:0611193286">06.11.19.32.86</a></li>
+        <li><a href="https://barbarabeauty13.booksy.com/a/" target="_blank">Booksy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Barbara Beauty — Tous droits réservés</div>
+    <div class="footer-social">
+      <a href="https://barbarabeauty13.booksy.com/a/" target="_blank" title="Booksy">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h5v5H7v-5z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Timeline scroll animation ──
+(function() {
+  const stepsContainer = document.querySelector('.process-steps');
+  const nums = document.querySelectorAll('.ps-num');
+  function updateTimeline() {
+    if (!stepsContainer) return;
+    const rect = stepsContainer.getBoundingClientRect();
+    const progress = Math.min(Math.max((window.innerHeight * 0.5 - rect.top) / rect.height, 0), 1);
+    stepsContainer.style.setProperty('--progress', progress * 100 + '%');
+    nums.forEach((num, i) => {
+      if (progress >= (i / (nums.length - 1)) * 0.9) num.classList.add('active');
+      else num.classList.remove('active');
+    });
+  }
+  window.addEventListener('scroll', updateTimeline, { passive: true });
+  updateTimeline();
+})();
+
+// ── Dynamic content loading ──
+(async function() {
+  try {
+    const res = await fetch('/api/content');
+    const c = await res.json();
+
+    // Hero
+    const heroTag = document.querySelector('.hero-tag');
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTag) heroTag.textContent = c.hero.tag;
+    if (heroTitle) heroTitle.innerHTML = c.hero.title;
+    document.querySelectorAll('a[href*="booksy"]').forEach(a => a.href = c.hero.booksyUrl);
+
+    // Services
+    const scGrid = document.querySelector('.sc-grid');
+    if (scGrid) {
+      scGrid.innerHTML = c.services.map(s => `
+        <div class="sc-card">
+          <div class="sc-photo${s.beforeAfter ? ' ba' : ''}">
+            ${s.photo ? `<img src="/${s.photo}" alt="${s.name}" />` : ''}
+          </div>
+          <div class="sc-overlay">
+            <div class="sc-name">${s.name}</div>
+            <div class="sc-desc">${s.description}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Formation
+    const fTitle = document.querySelector('.formation-title');
+    const fBody = document.querySelector('.formation-body');
+    const fFeatures = document.querySelector('.formation-features');
+    const fPrice = document.querySelector('.formation-price');
+    const fImg = document.querySelector('.formation-img img');
+    if (fTitle) fTitle.innerHTML = c.formation.title;
+    if (fBody) fBody.textContent = c.formation.description;
+    if (fFeatures) fFeatures.innerHTML = c.formation.features.map(f => `<li>${f}</li>`).join('');
+    if (fPrice) fPrice.textContent = c.formation.price;
+    if (fImg) fImg.src = '/' + c.formation.photo;
+
+    // About
+    const aTitle = document.querySelector('.about-title');
+    const aBody = document.querySelector('.about-body');
+    const aImg = document.querySelector('.about-img img');
+    if (aTitle) aTitle.innerHTML = c.about.title;
+    if (aBody) aBody.textContent = c.about.description;
+    if (aImg) aImg.src = '/' + c.about.photo;
+    const stats = document.querySelector('.about-stats');
+    if (stats) {
+      stats.innerHTML = c.about.stats.map(s => `
+        <div><div class="stat-n">${s.value}</div><div class="stat-l">${s.label}</div></div>
+      `).join('');
+    }
+
+    // Pricing
+    const pricingCats = document.querySelector('.pricing-categories');
+    if (pricingCats) {
+      pricingCats.innerHTML = c.pricing.map(cat => `
+        <div>
+          <h3 class="pricing-cat-title">${cat.icon} <em>${cat.category}</em></h3>
+          <div class="pricing-list">
+            ${cat.items.map(item => `
+              <div class="pricing-row">
+                <div>
+                  <div class="pr-name">${item.name}</div>
+                  <div class="pr-detail">${item.detail}</div>
+                </div>
+                <div class="pr-price">${item.price}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Testimonials
+    const testiGrid = document.querySelector('.testi-grid');
+    if (testiGrid) {
+      testiGrid.innerHTML = c.testimonials.map(t => `
+        <div class="testi-card">
+          <div class="testi-stars">${'★'.repeat(t.stars)}</div>
+          <p class="testi-text">"${t.text}"</p>
+          <div class="testi-author">${t.author}</div>
+          <div class="testi-service">${t.service}</div>
+        </div>
+      `).join('');
+    }
+
+    // Gallery
+    const gGrid = document.querySelector('.gallery-grid');
+    if (gGrid) {
+      gGrid.innerHTML = c.gallery.map(g => `
+        <div class="g-item">${g.photo ? `<img src="/${g.photo}" alt="${g.alt}" style="width:100%;height:100%;object-fit:cover" />` : '📸'}</div>
+      `).join('');
+    }
+
+    // Contact
+    const addr = document.querySelector('.cr-value');
+    const phone = document.querySelectorAll('.cr-value')[1];
+    if (addr) addr.textContent = c.contact.address;
+    if (phone) phone.innerHTML = `<a href="tel:${c.contact.phone.replace(/\./g,'')}">${c.contact.phone}</a>`;
+
+    // Footer
+    const footerTagline = document.querySelector('.footer-tagline');
+    if (footerTagline) footerTagline.innerHTML = `Onglerie & Beauté du Regard<br>${c.contact.address}`;
+
+  } catch(e) {
+    console.log('Content loading from static HTML (no API available)');
+  }
+})();
+</script>
+
+</body>
+</html>
