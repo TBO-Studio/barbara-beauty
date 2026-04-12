@@ -528,6 +528,49 @@
 </head>
 <body>
 
+<!-- ── PASSWORD GATE ── -->
+<div id="password-gate" style="
+  position:fixed; inset:0; z-index:9999;
+  background:#0D0D0D;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
+">
+  <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; color:#fff; letter-spacing:0.08em;">BARBARA <span style="font-style:italic;color:#D4BC9A;">beauty</span></div>
+  <p style="font-family:'Inter',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.4); letter-spacing:0.15em; text-transform:uppercase;">Site en cours de finalisation</p>
+  <div style="display:flex; gap:0; border:1px solid rgba(255,255,255,0.15); border-radius:40px; overflow:hidden; margin-top:8px;">
+    <input id="gate-input" type="password" placeholder="Mot de passe" style="
+      background:transparent; border:none; outline:none;
+      padding:14px 24px; color:#fff; font-family:'Inter',sans-serif; font-size:0.85rem;
+      width:220px;
+    " />
+    <button onclick="checkGate()" style="
+      background:#D4BC9A; border:none; cursor:pointer;
+      padding:14px 24px; font-family:'Inter',sans-serif; font-size:0.8rem;
+      color:#0D0D0D; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    ">Entrer</button>
+  </div>
+  <p id="gate-error" style="font-family:'Inter',sans-serif; font-size:0.78rem; color:#c0392b; display:none;">Mot de passe incorrect</p>
+</div>
+
+<script>
+  (function() {
+    if (sessionStorage.getItem('bb_access') === '1') {
+      document.getElementById('password-gate').style.display = 'none';
+    }
+    document.getElementById('gate-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkGate();
+    });
+  })();
+  function checkGate() {
+    if (document.getElementById('gate-input').value === 'barbara2026') {
+      sessionStorage.setItem('bb_access', '1');
+      document.getElementById('password-gate').style.display = 'none';
+    } else {
+      document.getElementById('gate-error').style.display = 'block';
+      document.getElementById('gate-input').value = '';
+    }
+  }
+</script>
+
 <!-- ── NAV ── -->
 <div class="nav-wrap">
   <nav>
