@@ -996,7 +996,7 @@
 // ── Dynamic content loading ──
 (async function() {
   try {
-    const res = await fetch('/api/content');
+    const res = await fetch('/content.json');
     const c = await res.json();
 
     // Hero
