@@ -36,19 +36,11 @@
       box-shadow: 0 4px 30px rgba(0,0,0,0.08);
     }
     .nav-logo {
-      display: flex; flex-direction: column; line-height: 1;
+      display: flex; align-items: center; line-height: 1;
     }
-    .nav-logo-top {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; letter-spacing: 3px;
-      color: var(--black); text-transform: uppercase;
-    }
-    .nav-logo-line {
-      width: 100%; height: 1px; background: var(--black); margin: 1px 0;
-    }
-    .nav-logo-bottom {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1rem; color: var(--black); margin-top: -2px;
+    .nav-logo img {
+      height: 32px; width: auto;
+      image-rendering: -webkit-optimize-contrast;
     }
     .nav-links { display: flex; gap: 4px; align-items: center; }
     .nav-links a {
@@ -490,15 +482,10 @@
     .footer-logo-wrap {
       display: flex; flex-direction: column; line-height: 1; margin-bottom: 16px;
     }
-    .footer-logo-top {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 600; letter-spacing: 4px;
-      color: var(--white); text-transform: uppercase;
-    }
-    .footer-logo-line { width: 100%; max-width: 180px; height: 1px; background: rgba(255,255,255,0.3); margin: 2px 0; }
-    .footer-logo-bottom {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-top: -2px;
+    .footer-logo-wrap img {
+      height: 40px; width: auto;
+      filter: invert(1) brightness(2);
+      image-rendering: -webkit-optimize-contrast;
     }
     .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.8; font-weight: 300; }
     .footer-col-title {
@@ -663,7 +650,7 @@
 <div class="nav-wrap">
   <nav>
     <a href="#" class="nav-logo" style="text-decoration:none;">
-      <img src="LOGO - BARBARA BEAUTY noir  (1).png" alt="Barbara Beauty" style="height:40px; width:auto;" />
+      <img src="LOGO - BARBARA BEAUTY noir  (1).png" alt="Barbara Beauty" />
     </a>
     <div class="nav-links">
       <a href="#services">Services</a>
@@ -1016,7 +1003,7 @@
   <div class="footer-top">
     <div>
       <div class="footer-logo-wrap">
-        <img src="LOGO - BARBARA BEAUTY noir  (1).png" alt="Barbara Beauty" style="height:48px; width:auto; filter: invert(1) brightness(2);" />
+        <img src="LOGO - BARBARA BEAUTY noir  (1).png" alt="Barbara Beauty" />
       </div>
       <p class="footer-tagline">Onglerie & Beauté du Regard<br>58 route de Cabriès, 13320 Bouc-Bel-Air</p>
     </div>
