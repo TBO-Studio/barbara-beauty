@@ -36,17 +36,8 @@
       display: flex; align-items: center; justify-content: space-between;
       box-shadow: 0 4px 30px rgba(0,0,0,0.08);
     }
-    .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
-    .nav-logo-top {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem; font-weight: 600; letter-spacing: 3px;
-      color: var(--black); text-transform: uppercase;
-    }
-    .nav-logo-line { width: 100%; height: 1px; background: var(--black); margin: 1px 0; }
-    .nav-logo-bottom {
-      font-family: 'Great Vibes', cursive;
-      font-size: 0.85rem; color: var(--gold); text-align: center;
-    }
+    .nav-logo { display: flex; align-items: center; line-height: 1; text-decoration: none; }
+    .nav-logo img { height: 32px; width: auto; }
     .nav-links { display: flex; gap: 28px; }
     .nav-links a {
       font-size: 0.78rem; font-weight: 500; color: var(--text);
@@ -294,12 +285,7 @@
       margin-bottom: 24px; flex-wrap: wrap;
     }
     .footer-logo-wrap { display: flex; flex-direction: column; line-height: 1; margin-bottom: 16px; }
-    .footer-logo-top {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
-    }
-    .footer-logo-line { width: 100%; height: 1px; background: rgba(255,255,255,0.3); margin: 2px 0; }
-    .footer-logo-bottom { font-family: 'Great Vibes', cursive; font-size: 0.9rem; color: var(--gold); text-align: center; }
+    .footer-logo-wrap img { height: 36px; width: auto; max-width: 200px; filter: invert(1) brightness(2); }
     .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.6; max-width: 260px; }
     .footer-col-title {
       font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
@@ -332,9 +318,7 @@
 <div class="nav-wrap">
   <nav>
     <a class="nav-logo" href="serenique-lash.html">
-      <span class="nav-logo-top">BARBARA</span>
-      <div class="nav-logo-line"></div>
-      <span class="nav-logo-bottom">beauty</span>
+      <img src="logo-barbara.png" alt="Barbara Beauty" />
     </a>
     <div class="nav-links">
       <a href="serenique-lash.html#services">Services</a>
@@ -596,9 +580,7 @@
   <div class="footer-top">
     <div>
       <div class="footer-logo-wrap">
-        <span class="footer-logo-top">BARBARA</span>
-        <div class="footer-logo-line"></div>
-        <span class="footer-logo-bottom">beauty</span>
+        <img src="logo-barbara.png" alt="Barbara Beauty" />
       </div>
       <p class="footer-tagline">Formatrice certifiée CilsJo<br>Marseille | Bouc-Bel-Air</p>
     </div>
