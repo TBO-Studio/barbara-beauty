@@ -1063,6 +1063,13 @@
           </div>
         </div>
         <div class="contact-row">
+          <div class="cr-icon">&#9993;&#65039;</div>
+          <div>
+            <div class="cr-label">Email</div>
+            <div class="cr-value"><a href="mailto:barbarabeauty.formation@gmail.com">barbarabeauty.formation@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
           <div class="cr-icon">&#128197;</div>
           <div>
             <div class="cr-label">Réservation en ligne</div>
@@ -1112,6 +1119,7 @@
       <div class="footer-col-title">Contact</div>
       <ul class="footer-links">
         <li><a href="tel:0611193286">06.11.19.32.86</a></li>
+        <li><a href="mailto:barbarabeauty.formation@gmail.com">barbarabeauty.formation@gmail.com</a></li>
         <li><a href="https://barbarabeauty13.booksy.com/a/" target="_blank">Booksy</a></li>
       </ul>
     </div>
@@ -1243,14 +1251,14 @@
     }
 
     // Contact
-    const addr = document.querySelector('.cr-value');
-    const phone = document.querySelectorAll('.cr-value')[1];
-    if (addr) addr.textContent = c.contact.address;
-    if (phone) phone.innerHTML = `<a href="tel:${c.contact.phone.replace(/\./g,'')}">${c.contact.phone}</a>`;
+    const crValues = document.querySelectorAll('.cr-value');
+    if (crValues[0]) crValues[0].textContent = c.contact.address;
+    if (crValues[1]) crValues[1].innerHTML = `<a href="tel:${c.contact.phone.replace(/\./g,'')}">${c.contact.phone}</a>`;
+    if (crValues[2] && c.contact.email) crValues[2].innerHTML = `<a href="mailto:${c.contact.email}">${c.contact.email}</a>`;
 
     // Footer
     const footerTagline = document.querySelector('.footer-tagline');
-    if (footerTagline) footerTagline.innerHTML = `Onglerie & Beauté du Regard<br>${c.contact.address}`;
+    if (footerTagline) footerTagline.innerHTML = `Experte du Regard<br>${c.contact.address}`;
 
   } catch(e) {
     console.log('Content loading from static HTML (no API available)');
