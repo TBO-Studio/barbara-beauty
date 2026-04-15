@@ -57,6 +57,49 @@
       transition: background 0.3s; text-decoration: none;
     }
     .nav-cta:hover { background: var(--black2); }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .nav-burger {
+      display: none;
+      background: transparent; border: none; cursor: pointer;
+      padding: 8px; flex-direction: column; gap: 4px;
+    }
+    .nav-burger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--black); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 300;
+      background: var(--black); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu-close {
+      position: absolute; top: 24px; right: 24px;
+      background: transparent; border: none; color: var(--white);
+      font-size: 2.5rem; cursor: pointer; line-height: 1;
+    }
+    .mobile-menu-links {
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
+    }
+    .mobile-menu-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; color: var(--white);
+      text-decoration: none; font-weight: 400;
+    }
+    .mobile-menu-links a:hover { color: var(--gold-light); }
+    .mobile-menu-cta {
+      background: var(--gold); color: var(--black) !important;
+      padding: 14px 32px; border-radius: 50px;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.88rem !important; font-weight: 600 !important;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 12px;
+    }
 
     /* ── HERO ── */
     .hero {
@@ -526,9 +569,10 @@
 
       /* NAV */
       .nav-wrap { width: calc(100% - 24px); top: 12px; }
-      nav { padding: 10px 14px; }
+      nav { padding: 8px 10px 8px 16px; }
       .nav-links { display: none; }
-      .nav-cta { padding: 10px 18px; font-size: 0.75rem; }
+      .nav-cta { display: none; }
+      .nav-burger { display: flex; }
 
       /* HERO */
       .hero-content { padding: 0 24px 56px; }
@@ -672,9 +716,34 @@
       <a href="#galerie">Galerie</a>
       <a href="#contact">Contact</a>
     </div>
-    <a class="nav-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+    <div class="nav-right">
+      <a class="nav-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+      <button class="nav-burger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </div>
+
+<!-- ── MOBILE MENU ── -->
+<div id="mobile-menu" class="mobile-menu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Fermer">&times;</button>
+  <div class="mobile-menu-links">
+    <a href="#services" onclick="toggleMobileMenu()">Services</a>
+    <a href="formation.html">Formation</a>
+    <a href="#about" onclick="toggleMobileMenu()">À propos</a>
+    <a href="#tarifs" onclick="toggleMobileMenu()">Tarifs</a>
+    <a href="#galerie" onclick="toggleMobileMenu()">Galerie</a>
+    <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+    <a class="mobile-menu-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+  </div>
+</div>
+<script>
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
+  }
+</script>
 
 <!-- ── HERO ── -->
 <section class="hero">
