@@ -304,7 +304,16 @@
     /* ── PRICING ── */
     .pricing { padding: 80px 60px; background: var(--beige2); }
     .pricing-head { text-align: center; margin-bottom: 60px; }
-    .pricing-categories { display: flex; flex-direction: column; gap: 48px; }
+    .pricing-categories {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px 64px;
+      align-items: start;
+    }
+    .pricing-categories > div:nth-child(1),
+    .pricing-categories > div:nth-child(2),
+    .pricing-categories > div:nth-child(3) { grid-column: 1; }
+    .pricing-categories > div:nth-child(4) { grid-column: 2; grid-row: 1; }
     .pricing-cat-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.8rem; font-weight: 400; color: var(--black);
@@ -566,7 +575,11 @@
 
       /* PRICING */
       .pricing { padding: 56px 24px; }
-      .pricing-categories { gap: 36px; }
+      .pricing-categories { grid-template-columns: 1fr; gap: 36px; }
+      .pricing-categories > div:nth-child(1),
+      .pricing-categories > div:nth-child(2),
+      .pricing-categories > div:nth-child(3),
+      .pricing-categories > div:nth-child(4) { grid-column: 1; grid-row: auto; }
 
       /* FORMATION */
       .formation { padding: 56px 24px; }
@@ -849,7 +862,7 @@
 <section class="pricing" id="tarifs">
   <div class="pricing-head">
     <div class="tag tag-center">Tarifs</div>
-    <h2 class="section-title">Nos <em>prestations & tarifs</em></h2>
+    <h2 class="section-title"><em>Prestations & tarifs</em></h2>
   </div>
   <div class="pricing-categories">
     <!-- Onglerie -->
