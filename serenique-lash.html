@@ -442,6 +442,13 @@
       background: rgba(255,255,255,0.2);
       display: flex; align-items: center; justify-content: center;
     }
+    .btn-gold-outline {
+      background: transparent; color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-gold-outline:hover { background: var(--gold); color: var(--white); }
+    .btn-gold-outline .arrow { background: rgba(200,164,110,0.15); }
+    .formation-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
     .formation-price {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.5rem; font-weight: 400; color: var(--gold-light);
@@ -836,10 +843,16 @@
       </ul>
       <div class="formation-price">Sur devis</div>
       <div class="formation-price-note">Paiement en ligne sécurisé disponible</div>
-      <a class="btn-gold" href="#contact">
-        Me contacter pour la formation
-        <span class="arrow">&#8599;</span>
-      </a>
+      <div class="formation-ctas">
+        <a class="btn-gold" href="formation.html">
+          Voir nos formations
+          <span class="arrow">&#8599;</span>
+        </a>
+        <a class="btn-gold btn-gold-outline" href="#contact">
+          Me contacter
+          <span class="arrow">&#8599;</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -1102,11 +1115,11 @@
     <div>
       <div class="footer-col-title">Services</div>
       <ul class="footer-links">
-        <li><a href="#services">Vernis Semi-Permanent</a></li>
         <li><a href="#services">Extensions Cil à Cil</a></li>
         <li><a href="#services">Volume Russe</a></li>
         <li><a href="#services">Lash Lift</a></li>
         <li><a href="#services">Brow Lift</a></li>
+        <li><a href="#services">Vernis Semi-Permanent</a></li>
       </ul>
     </div>
     <div>
