@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Barbara Beauty | Bouc-Bel-Air</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --beige:     #F5F0EB;
+      --beige2:    #EDE7DF;
+      --beige3:    #E5DDD3;
+      --black:     #1A1A1A;
+      --black2:    #111111;
+      --gold:      #B8956A;
+      --gold-light:#D4BC9A;
+      --gold-dark: #9A7B55;
+      --white:     #FFFFFF;
+      --muted:     #8A8278;
+      --text:      #1A1A1A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--beige); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    .nav-wrap {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 200; width: calc(100% - 48px); max-width: 1200px;
+    }
+    nav {
+      background: var(--white);
+      border-radius: 60px;
+      padding: 10px 20px 10px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 32px; width: auto; image-rendering: -webkit-optimize-contrast; }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500; color: var(--text);
+      text-decoration: none; padding: 8px 14px; border-radius: 50px;
+      transition: background 0.2s;
+    }
+    .nav-links a:hover { background: var(--beige); }
+    .nav-links a.active { background: var(--beige2); }
+    .nav-cta {
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50px;
+      padding: 12px 26px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: background 0.3s; text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--black2); }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .nav-burger {
+      display: none;
+      background: transparent; border: none; cursor: pointer;
+      padding: 8px; flex-direction: column; gap: 4px;
+    }
+    .nav-burger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--black); border-radius: 2px;
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 300;
+      background: var(--black); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu-close {
+      position: absolute; top: 24px; right: 24px;
+      background: transparent; border: none; color: var(--white);
+      font-size: 2.5rem; cursor: pointer; line-height: 1;
+    }
+    .mobile-menu-links { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    .mobile-menu-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; color: var(--white);
+      text-decoration: none; font-weight: 400;
+    }
+    .mobile-menu-links a:hover { color: var(--gold-light); }
+    .mobile-menu-cta {
+      background: var(--gold); color: var(--black) !important;
+      padding: 14px 32px; border-radius: 50px;
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.88rem !important; font-weight: 600 !important;
+      letter-spacing: 1px; text-transform: uppercase; margin-top: 12px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 160px 60px 80px;
+      background: var(--black);
+      text-align: center;
+    }
+    .page-header-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .page-header-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 400; color: var(--white); line-height: 1.1;
+    }
+    .page-header h1 em { font-style: italic; color: var(--gold-light); }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      padding: 80px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Infos */
+    .contact-infos { display: flex; flex-direction: column; gap: 24px; }
+    .contact-info-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px 32px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .ci-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--beige2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .ci-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 4px;
+    }
+    .ci-value {
+      font-size: 0.95rem; font-weight: 500; color: var(--text);
+    }
+    .ci-value a { color: var(--text); text-decoration: none; }
+    .ci-value a:hover { color: var(--gold); }
+
+    .contact-rdv {
+      background: var(--black);
+      border-radius: 20px;
+      padding: 36px 32px;
+      text-align: center;
+    }
+    .contact-rdv-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 400; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .contact-rdv-title em { font-style: italic; color: var(--gold-light); }
+    .contact-rdv-sub {
+      font-size: 0.82rem; color: rgba(255,255,255,0.45);
+      margin-bottom: 28px; line-height: 1.7;
+    }
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--gold); color: var(--white);
+      border: none; border-radius: 50px; padding: 16px 28px 16px 32px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: background 0.3s;
+      text-decoration: none;
+    }
+    .btn-gold:hover { background: var(--gold-dark); }
+    .btn-gold .arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Formulaire */
+    .contact-form-wrap {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 40px;
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 400; margin-bottom: 28px;
+    }
+    .form-title em { font-style: italic; color: var(--gold); }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group label {
+      display: block; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1.5px solid var(--beige3);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; color: var(--text);
+      background: var(--beige);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; margin-top: 8px; justify-content: center; }
+    .form-success {
+      display: none;
+      text-align: center; padding: 24px;
+      color: var(--gold); font-size: 0.92rem; font-weight: 500;
+    }
+    .form-success-icon { font-size: 2rem; margin-bottom: 8px; }
+
+    /* ── MAP ── */
+    .map-section { padding: 0 60px 80px; max-width: 1100px; margin: 0 auto; }
+    .map-embed {
+      border-radius: 24px; overflow: hidden;
+      height: 350px; width: 100%;
+      border: none;
+    }
+
+    /* ── FOOTER ── */
+    footer { background: var(--black); color: var(--white); }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px; padding: 60px 60px 40px;
+    }
+    .footer-logo-wrap { margin-bottom: 16px; }
+    .footer-logo-wrap img { height: 32px; width: auto; filter: invert(1) brightness(2); }
+    .footer-tagline { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.8; }
+    .footer-col-title {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 20px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4); transition: all 0.2s;
+    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-social svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .page-header { padding: 130px 24px 56px; }
+      .contact-section { padding: 48px 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+      .map-section { padding: 0 24px 56px; }
+      .map-embed { height: 260px; }
+      .contact-form-wrap { padding: 28px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; padding: 40px 24px 28px; gap: 28px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<div class="nav-wrap">
+  <nav>
+    <a href="serenique-lash.html" class="nav-logo">
+      <img src="logo-barbara.png" alt="Barbara Beauty" />
+    </a>
+    <div class="nav-links">
+      <a href="serenique-lash.html#services">Services</a>
+      <a href="formation.html">Formation</a>
+      <a href="serenique-lash.html#about">À propos</a>
+      <a href="serenique-lash.html#tarifs">Tarifs</a>
+      <a href="serenique-lash.html#galerie">Galerie</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+      <button class="nav-burger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<!-- ── MOBILE MENU ── -->
+<div id="mobile-menu" class="mobile-menu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Fermer">&times;</button>
+  <div class="mobile-menu-links">
+    <a href="serenique-lash.html#services" onclick="toggleMobileMenu()">Services</a>
+    <a href="formation.html" onclick="toggleMobileMenu()">Formation</a>
+    <a href="serenique-lash.html#about" onclick="toggleMobileMenu()">À propos</a>
+    <a href="serenique-lash.html#tarifs" onclick="toggleMobileMenu()">Tarifs</a>
+    <a href="serenique-lash.html#galerie" onclick="toggleMobileMenu()">Galerie</a>
+    <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+    <a class="mobile-menu-cta" href="https://barbarabeauty13.booksy.com/a/" target="_blank">Prendre RDV</a>
+  </div>
+</div>
+<script>
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('mobile-menu').classList.contains('open') ? 'hidden' : '';
+  }
+</script>
+
+<!-- ── PAGE HEADER ── -->
+<div class="page-header">
+  <div class="page-header-tag">Barbara Beauty — Bouc-Bel-Air</div>
+  <h1>Contactez-<em>nous</em></h1>
+</div>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section">
+  <div class="contact-grid">
+
+    <!-- Colonne gauche : infos + RDV -->
+    <div class="contact-infos">
+
+      <div class="contact-info-card">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Adresse</div>
+          <div class="ci-value">58 route de Cabriès<br>13320 Bouc-Bel-Air</div>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="ci-icon">📞</div>
+        <div>
+          <div class="ci-label">Téléphone</div>
+          <div class="ci-value"><a href="tel:0611193286">06.11.19.32.86</a></div>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="ci-icon">✉️</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value"><a href="mailto:barbarabeauty.formation@gmail.com">barbarabeauty.formation@gmail.com</a></div>
+        </div>
+      </div>
+
+      <div class="contact-rdv">
+        <div class="contact-rdv-title">Prendre <em>rendez-vous</em></div>
+        <p class="contact-rdv-sub">Réservez directement en ligne via Booksy.<br>Créneaux disponibles 7j/7.</p>
+        <a class="btn-gold" href="https://barbarabeauty13.booksy.com/a/" target="_blank">
+          Réserver sur Booksy
+          <span class="arrow">&#8599;</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Colonne droite : formulaire -->
+    <div class="contact-form-wrap">
+      <div class="form-title">Envoyez-nous <em>un message</em></div>
+      <form id="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required />
+          </div>
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="sujet">Sujet</label>
+          <select id="sujet" name="sujet">
+            <option value="">Sélectionnez un sujet</option>
+            <option value="rdv">Prise de rendez-vous</option>
+            <option value="formation">Formation</option>
+            <option value="tarif">Renseignement tarif</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+        </div>
+        <button type="submit" class="btn-gold form-submit">
+          Envoyer le message
+          <span class="arrow">&#8599;</span>
+        </button>
+      </form>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✅</div>
+        Message envoyé ! Barbara vous répondra dans les plus brefs délais.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CARTE ── -->
+<div class="map-section">
+  <iframe
+    class="map-embed"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.0!2d5.4!3d43.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c9b5a0a0a0a0a1%3A0x0!2s58+route+de+Cabri%C3%A8s%2C+13320+Bouc-Bel-Air!5e0!3m2!1sfr!2sfr!4v1"
+    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+    title="Barbara Beauty — 58 route de Cabriès, Bouc-Bel-Air">
+  </iframe>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo-wrap">
+        <img src="logo-barbara.png" alt="Barbara Beauty" />
+      </div>
+      <p class="footer-tagline">Onglerie & Beauté du Regard<br>58 route de Cabriès, 13320 Bouc-Bel-Air</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="serenique-lash.html#services">Extensions Cil à Cil</a></li>
+        <li><a href="serenique-lash.html#services">Volume Russe</a></li>
+        <li><a href="serenique-lash.html#services">Lash Lift</a></li>
+        <li><a href="serenique-lash.html#services">Brow Lift</a></li>
+        <li><a href="serenique-lash.html#services">Vernis Semi-Permanent</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="serenique-lash.html">Accueil</a></li>
+        <li><a href="serenique-lash.html#about">À propos</a></li>
+        <li><a href="serenique-lash.html#tarifs">Tarifs</a></li>
+        <li><a href="formation.html">Formation</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:0611193286">06.11.19.32.86</a></li>
+        <li><a href="mailto:barbarabeauty.formation@gmail.com">barbarabeauty.formation@gmail.com</a></li>
+        <li><a href="https://barbarabeauty13.booksy.com/a/" target="_blank">Booksy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Barbara Beauty — Tous droits réservés</div>
+    <div class="footer-social">
+      <a href="https://barbarabeauty13.booksy.com/a/" target="_blank" title="Booksy">
+        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h5v5H7v-5z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const prenom = form.prenom.value;
+    const nom = form.nom.value;
+    const email = form.email.value;
+    const sujet = form.sujet.value;
+    const message = form.message.value;
+    const subject = encodeURIComponent((sujet || 'Contact') + ' — ' + prenom + ' ' + nom);
+    const body = encodeURIComponent('De : ' + prenom + ' ' + nom + '\nEmail : ' + email + '\n\n' + message);
+    window.location.href = 'mailto:barbarabeauty.formation@gmail.com?subject=' + subject + '&body=' + body;
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
