@@ -20,13 +20,13 @@
     {
       "name": "Lash Lift",
       "description": "Rehaussement de vos cils naturels — l'effet mascara sans mascara.",
-      "photo": "lashlift.png",
+      "photo": "Lashlift.jpg",
       "beforeAfter": true
     },
     {
       "name": "Brow Lift",
       "description": "Restructuration et rehaussement de vos sourcils pour un regard ouvert.",
-      "photo": "browlift.png",
+      "photo": "BrowLift.jpg",
       "beforeAfter": true
     },
     {
